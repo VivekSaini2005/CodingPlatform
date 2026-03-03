@@ -1,0 +1,41 @@
+{
+    "title": "Sort the Array",
+    "description": "Given an array of integers, sort the array in ascending order and print the result.",
+    "difficulty": "easy",
+    "tags": "array",
+    "visibleTestCases": [
+        {
+            "input": "5\n5 3 1 4 2",
+            "output": "1 2 3 4 5",
+            "explationation": "The array is sorted in ascending order."
+        },
+        {
+            "input": "3\n10 -1 2",
+            "output": "-1 2 10",
+            "explationation": "Negative numbers are also handled correctly."
+        }
+    ],
+    "hiddenTestCases": [
+        {
+            "input": "4\n4 4 4 4",
+            "output": "4 4 4 4"
+        },
+        {
+            "input": "1\n100",
+            "output": "100"
+        }
+    ],
+    "startCode": [
+        {
+            "language": "c++",
+            "initialCode": "#include <bits/stdc++.h>\nusing namespace std;\nvoid sortArray(vector<int>& arr){\n    // write your code here\n}\nint main(){\n    int n; cin>>n;\n    vector<int> arr(n);\n    for(int i=0;i<n;i++) cin>>arr[i];\n    sortArray(arr);\n    for(int x: arr) cout<<x<<\" \";\n}\n"
+        }
+    ],
+    "referenceSolution": [
+        {
+            "language": "c++",
+            "completeSolution": "#include <bits/stdc++.h>\nusing namespace std;\nvoid sortArray(vector<int>& arr){\n    sort(arr.begin(), arr.end());\n}\nint main(){\n    int n; cin>>n;\n    vector<int> arr(n);\n    for(int i=0;i<n;i++) cin>>arr[i];\n    sortArray(arr);\n    for(int x: arr) cout<<x<<\" \";\n}\n"
+        }
+    ],
+    "problemCreator": "6519f10e8d1e2a1234567890"
+}
