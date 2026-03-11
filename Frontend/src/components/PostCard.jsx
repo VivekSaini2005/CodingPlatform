@@ -7,13 +7,17 @@ import { useAuth } from "../context/AuthContext";
 
 const PostCard = ({ post, refreshPosts }) => {
   const [showComments, setShowComments] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   const [likes, setLikes] = useState(post.likes?.length || 0);
   const [dislikes, setDislikes] = useState(post.dislikes?.length || 0);
   const [commentCount, setCommentCount] = useState(post.commentCount || 0);
 
   const { user } = useAuth();
-
   const userId = user ? user._id : null;
+
+  const [isLiked, setIsLiked] = useState(post.likes?.some(id => id === userId || id?._id === userId) || false);
+  const [isDisliked, setIsDisliked] = useState(post.dislikes?.some(id => id === userId || id?._id === userId) || false);
+
   console.log(post);
   /*
   LIKE POST
@@ -25,6 +29,13 @@ const PostCard = ({ post, refreshPosts }) => {
       userId,
       authorId: post.author._id
     });
+
+    if (isLiked) {
+      setIsLiked(false);
+    } else {
+      setIsLiked(true);
+      setIsDisliked(false);
+    }
   };
 
   /*
@@ -37,6 +48,13 @@ const PostCard = ({ post, refreshPosts }) => {
       userId,
       authorId: post.author._id
     });
+
+    if (isDisliked) {
+      setIsDisliked(false);
+    } else {
+      setIsDisliked(true);
+      setIsLiked(false);
+    }
   };
 
   useEffect(() => {
@@ -136,9 +154,19 @@ const PostCard = ({ post, refreshPosts }) => {
             )}
           </div>
 
-          <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-2">
-            {post.content}
-          </p>
+          <div className="mb-4">
+            <p className={`text-gray-600 dark:text-gray-300 text-sm whitespace-pre-wrap ${!isExpanded ? "line-clamp-2" : ""}`}>
+              {post.content}
+            </p>
+            {post.content && post.content.length > 200 && (
+              <button
+                onClick={() => setIsExpanded(!isExpanded)}
+                className="text-green-500 hover:underline text-sm font-medium mt-1 focus:outline-none"
+              >
+                {isExpanded ? "View less" : "View more"}
+              </button>
+            )}
+          </div>
 
           {/* Metadata Row */}
           <div className="flex flex-wrap items-center gap-4 text-gray-400 text-sm mb-4">
@@ -153,7 +181,7 @@ const PostCard = ({ post, refreshPosts }) => {
 
             <button
               onClick={handleLike}
-              className="flex items-center gap-1 hover:text-[#ff6b00] transition-colors"
+              className={`flex items-center gap-1 transition-colors ${isLiked ? "text-green-500 font-bold" : "hover:text-green-500"}`}
             >
               <ThumbsUp size={16} />
               <span>{likes}</span>
@@ -161,7 +189,7 @@ const PostCard = ({ post, refreshPosts }) => {
 
             <button
               onClick={handleDislike}
-              className="flex items-center gap-1 hover:text-red-500 transition-colors"
+              className={`flex items-center gap-1 transition-colors ${isDisliked ? "text-red-500 font-bold" : "hover:text-red-500"}`}
             >
               <ThumbsDown size={16} />
               <span>{dislikes}</span>

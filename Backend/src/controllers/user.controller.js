@@ -1,6 +1,7 @@
 const cloudinary = require("../config/cloudinary");
 const User = require("../models/user");
 const fs = require("fs");
+const Post = require("../models/postSchema");
 
 const updateProfile = async (req, res) => {
 
@@ -42,6 +43,16 @@ const updateProfile = async (req, res) => {
                 message: "User not found"
             });
         }
+
+        // update posts author info
+        await Post.updateMany(
+            { author: userId },
+            {
+                $set: {
+                    firstName: user.firstName
+                }
+            }
+        );
 
         res.status(200).json({
             message: "Profile updated successfully",
@@ -101,6 +112,16 @@ const uploadProfileImage = async (req, res) => {
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
+
+        // update posts
+        await Post.updateMany(
+            { author: req.result._id },
+            {
+                $set: {
+                    profileImage: result.secure_url
+                }
+            }
+        );
 
         res.status(200).json({
             message: "Image uploaded successfully",
