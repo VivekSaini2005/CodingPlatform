@@ -68,7 +68,7 @@ const submitToken = async (resultToken) => {
             const response = await axios.request(options);
             return response.data;
         } catch (error) {
-            console.error("Error Occured" + error);
+            console.error("Error Occured" + error.message);
         }
     }
 

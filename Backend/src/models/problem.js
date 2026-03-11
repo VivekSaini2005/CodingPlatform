@@ -18,9 +18,26 @@ const problemSchema = new Schema({
     },
     tags: {
         type: String,
-        enum: ['array', 'linklist', 'graph', 'DP'],
+        enum: ['Array', 'LinkList', 'Graph', 'DP', 'Math', 'math', 'array'],
         required: true
     },
+    explainTestCase: [{
+        input: {
+            type: String,
+            default: "",
+            required: true
+        },
+        output: {
+            type: String,
+            default: "",
+            required: true
+        },
+        explanation: {
+            type: String,
+            default: "",
+            required: true
+        }
+    }],
     visibleTestCases: [{
         input: {
             type: String,
@@ -30,7 +47,7 @@ const problemSchema = new Schema({
             type: String,
             required: true
         },
-        explationation: {
+        explanation: {
             type: String,
             required: true
         }
@@ -62,13 +79,17 @@ const problemSchema = new Schema({
         },
         completeSolution: {
             type: String,
-            requred: true
+            required: true
         }
     }],
     problemCreator: {
         type: Schema.Types.ObjectId,
         ref: 'user',
         required: true
+    },
+    ytlink: {
+        type: String,
+        default: ""
     }
 
 })

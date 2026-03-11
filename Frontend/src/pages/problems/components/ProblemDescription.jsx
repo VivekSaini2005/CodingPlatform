@@ -18,7 +18,7 @@ const ProblemDescription = ({ problem }) => {
                 <ReactMarkdown>{problem.description}</ReactMarkdown>
             </div>
 
-            {problem.visibleTestCases && problem.visibleTestCases.map((testCase, index) => (
+            {problem.explainTestCase && problem.explainTestCase.map((testCase, index) => (
                 <div key={index} className="space-y-4 mb-6">
                     <h3 className="text-lg font-bold text-gray-900 dark:text-white">Example {index + 1}:</h3>
                     <div className="pl-4 border-l-4 border-gray-700 space-y-2">

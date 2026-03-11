@@ -9,12 +9,12 @@ const Toolbar = ({
     submitLoading
 }) => {
     return (
-        <div className="bg-gray-900 border-b border-gray-700 px-4 py-2 flex justify-between items-center z-10">
+        <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 px-4 py-2 flex justify-between items-center z-10">
             <div className="flex items-center space-x-4">
                 <select
                     value={language}
                     onChange={onLanguageChange}
-                    className="bg-gray-800 border border-gray-700 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-200"
+                    className="bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 dark:text-gray-200"
                 >
                     <option value="javascript">JavaScript</option>
                     <option value="c++">C++</option>
@@ -26,7 +26,7 @@ const Toolbar = ({
                 <button
                     onClick={handleRun}
                     disabled={runLoading}
-                    className="flex items-center px-3 py-1.5 text-sm font-medium text-gray-200 bg-gray-800 border border-gray-700 rounded-md hover:bg-gray-700 disabled:opacity-50"
+                    className="flex items-center px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 disabled:opacity-50"
                 >
                     {runLoading ? (
                         <Loader2 className="w-4 h-4 mr-2 animate-spin text-blue-500" />

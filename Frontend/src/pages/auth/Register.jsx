@@ -2,9 +2,10 @@ import { useState } from 'react';
 import { User, Mail, Lock, Loader2, ArrowRight, Calendar } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { GoogleLogin } from '@react-oauth/google';
 
 const Register = () => {
-    const { register } = useAuth();
+    const { register, googleLogin } = useAuth();
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -40,6 +41,19 @@ const Register = () => {
             navigate('/problems');
         } catch (err) {
             setError(err || 'Registration failed. Please try again.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleGoogleSuccess = async (credentialResponse) => {
+        try {
+            setLoading(true);
+            setError(null);
+            await googleLogin(credentialResponse.credential);
+            navigate('/problems');
+        } catch (err) {
+            setError(err || 'Google signup failed. Please try again.');
         } finally {
             setLoading(false);
         }
@@ -180,6 +194,28 @@ const Register = () => {
                             </span>
                         )}
                     </button>
+
+                    <div className="mt-6">
+                        <div className="relative">
+                            <div className="absolute inset-0 flex items-center">
+                                <div className="w-full border-t border-gray-300 dark:border-gray-600"></div>
+                            </div>
+                            <div className="relative flex justify-center text-sm">
+                                <span className="px-2 bg-white dark:bg-gray-800 text-gray-500">
+                                    Or continue with
+                                </span>
+                            </div>
+                        </div>
+
+                        <div className="mt-6 w-full flex justify-center">
+                            <GoogleLogin
+                                onSuccess={handleGoogleSuccess}
+                                onError={() => {
+                                    setError('Google signup failed. Please try again.');
+                                }}
+                            />
+                        </div>
+                    </div>
                 </form>
 
                 <div className="mt-6 text-center text-sm">

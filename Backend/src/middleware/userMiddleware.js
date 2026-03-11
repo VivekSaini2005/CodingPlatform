@@ -8,19 +8,23 @@ const userMiddleware = async (req, res, next) => {
 
         const { token } = req.cookies;
 
+        // console.log(token);
+
         if (!token)
             throw new Error("Token is not Present");
 
         const payload = jwt.verify(token, process.env.JWT_KEY);
 
+        // console.log(payload);
         const { _id } = payload;
 
         if (!_id) {
             throw new Error("Id is missing");
         }
-
+        // console.log(_id);
         const result = await User.findById(_id);
 
+        // console.log(result);
         if (!result)
             throw new Error("User does not exist");
 
@@ -33,9 +37,9 @@ const userMiddleware = async (req, res, next) => {
 
         // if (IsBlocked)
         //     throw new Error("Invalid Token");
-
+        // console.log(result);
         req.result = result;
-
+        // console.log("next pauch gaya ");
         next();
     }
     catch (error) {

@@ -19,14 +19,14 @@ const Home = () => {
                                 Join our community of developers. Practice coding problems, participate in contests, and climb the leaderboard.
                             </p>
                             <div className="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
-                                <div className="rounded-md shadow">
+                                {/* <div className="rounded-md shadow">
                                     <Link
                                         to="/register"
                                         className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10"
                                     >
                                         Get Started
                                     </Link>
-                                </div>
+                                </div> */}
                                 <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
                                     <Link
                                         to="/problems"

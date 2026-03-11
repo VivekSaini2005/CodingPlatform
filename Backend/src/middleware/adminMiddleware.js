@@ -3,41 +3,44 @@ const jwt = require("jsonwebtoken");
 const redisClient = require("../config/redis")
 
 
-const adminMiddleware = async(req,res,next)=>{
-    try{
+const adminMiddleware = async (req, res, next) => {
+    try {
 
-        const {token} = req.cookies;
-        // console.log(req.body)
+        // console.log(req.body);
+        const { token } = req.cookies;
+        // console.log('1');
 
-        if(!token)
+        if (!token)
             throw new Error("Token is not Present");
+        // console.log('2');
+        const payload = jwt.verify(token, process.env.JWT_KEY);
+        // console.log('3');
+        const { _id } = payload;
 
-        const payload = jwt.verify(token,process.env.JWT_KEY);
-        
-        const {_id} = payload;
-
-        if(!_id){
+        if (!_id) {
             throw new Error("Id is missing");
         }
-
-        if(payload.role != 'admin')
+        // console.log('4');
+        if (payload.role != 'admin')
             throw new Error("Invalid Token");
+        // console.log('5');
+        const result = await User.findOne({ _id });
 
-        const result = await User.findOne({_id});
-
-        if(!result)
+        if (!result)
             throw new Error("User does not exist");
-
-        const IsBlocked = await redisClient.exists(`token:${token}`);
-        if(IsBlocked)
-            throw new Error("Invalid Token");
-
+        // console.log('6');
+        // const IsBlocked = await redisClient.exists(`token:${token}`);
+        // if (IsBlocked)
+        //     throw new Error("Invalid Token");
+        // console.log('7');
+        // console.log(result);
+        // console.log(req.body);
         req.result = result;
-
+        // console.log('8');
         next();
     }
-    catch(error){
-        res.status(400).send("Error: " + error);
+    catch (error) {
+        res.status(400).send("Error: " + error.message);
     }
 }
 

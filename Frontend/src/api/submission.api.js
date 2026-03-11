@@ -1,4 +1,5 @@
-const BASE_URL = "localhost:4000";
+const BASE_URL = "https://codingplatform-3ipe.onrender.com";
+// const BASE_URL = "http://localhost:4000";
 
 export const runCode = async (problemId, code, language) => {
     try {
@@ -64,9 +65,9 @@ export const submitCode = async (problemId, code, language) => {
             }
         );
 
-        console.log(language);
-        console.log(problemId);
-        console.log(code);
+        // console.log(language);
+        // console.log(problemId);
+        // console.log(code);
 
         if (!response.ok) {
             const errorData = await response.json();
@@ -101,7 +102,10 @@ export const getSubmissions = async (problemId) => {
             throw errorData || "Failed to fetch submissions";
         }
 
+        // console.log("response ", response.body);
+
         const data = await response.json();
+        // console.log("data ", data);
         return data;
     } catch (error) {
         console.error("GET SUBMISSIONS ERROR:", error);

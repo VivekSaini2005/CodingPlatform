@@ -1,16 +1,19 @@
 import { useState } from 'react';
 import { Mail, Lock, Loader2, ArrowRight } from 'lucide-react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { GoogleLogin } from '@react-oauth/google';
 
 const Login = () => {
+
+    const location = useLocation();
     const [formData, setFormData] = useState({
         email: '',
         password: '',
     });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const { login } = useAuth();
+    const { login, googleLogin } = useAuth();
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -20,10 +23,26 @@ const Login = () => {
 
         try {
             await login(formData);
-            // console.log(formData);
-            navigate('/problems');
+            const redirectPath =
+                location.state?.from || "/problems";
+
+            navigate(redirectPath, { replace: true });
         } catch (err) {
             setError(err || 'Invalid credentials. Please try again.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleGoogleSuccess = async (credentialResponse) => {
+        try {
+            setLoading(true);
+            setError(null);
+            await googleLogin(credentialResponse.credential);
+            const redirectPath = location.state?.from || "/problems";
+            navigate(redirectPath, { replace: true });
+        } catch (err) {
+            setError(err || 'Google login failed. Please try again.');
         } finally {
             setLoading(false);
         }
@@ -132,6 +151,28 @@ const Login = () => {
                             </span>
                         )}
                     </button>
+
+                    <div className="mt-6">
+                        <div className="relative">
+                            <div className="absolute inset-0 flex items-center">
+                                <div className="w-full border-t border-gray-300 dark:border-gray-600"></div>
+                            </div>
+                            <div className="relative flex justify-center text-sm">
+                                <span className="px-2 bg-white dark:bg-gray-800 text-gray-500">
+                                    Or continue with
+                                </span>
+                            </div>
+                        </div>
+
+                        <div className="mt-6 w-full flex justify-center">
+                            <GoogleLogin
+                                onSuccess={handleGoogleSuccess}
+                                onError={() => {
+                                    setError('Google login failed. Please try again.');
+                                }}
+                            />
+                        </div>
+                    </div>
                 </form>
 
                 <div className="mt-6 text-center text-sm">

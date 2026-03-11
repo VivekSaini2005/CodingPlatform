@@ -1,5 +1,7 @@
 import React from 'react';
 import { useAuth } from '../context/AuthContext';
+import RecentActivity from './profileComponent/RecentActivity';
+import HeatMap from './profileComponent/HeatMap';
 import {
     LayoutDashboard,
     Zap,
@@ -16,6 +18,7 @@ import { Link, Navigate } from 'react-router-dom';
 const Dashboard = () => {
     const { user, loading } = useAuth();
 
+    console.log(user);
     if (loading) {
         return (
             <div className="flex justify-center items-center min-h-[60vh]">
@@ -71,73 +74,23 @@ const Dashboard = () => {
                         <StatCard
                             icon={<Trophy className="h-6 w-6 text-blue-500" />}
                             label="Rank"
-                            value="N/A"
+                            value={user?.rank || "N/A"}
                             color="border-blue-500/20"
                         />
                         <StatCard
                             icon={<TrendingUp className="h-6 w-6 text-purple-500" />}
                             label="Rating"
-                            value="N/A"
+                            value={user?.rating || "soon"}
                             color="border-purple-500/20"
                         />
                     </div>
 
-                    {/* Resume Section */}
-                    <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
-                        <div className="flex items-center gap-2 mb-6">
-                            <Clock className="h-5 w-5 text-blue-500" />
-                            <h2 className="text-xl font-bold text-gray-900 dark:text-white">Pick up where you left off</h2>
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div className="group p-4 rounded-xl border border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-all cursor-pointer">
-                                <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-1">Two Sum</h3>
-                                <div className="flex items-center gap-2 text-xs text-gray-500 mb-4">
-                                    <span className="text-green-500 font-medium">Easy</span>
-                                    <span>•</span>
-                                    <span>Attempted 2 hours ago</span>
-                                </div>
-                                <div className="flex items-center justify-between">
-                                    <div className="h-1.5 w-full bg-gray-100 dark:bg-gray-600 rounded-full mr-4">
-                                        <div className="h-full w-2/3 bg-blue-500 rounded-full"></div>
-                                    </div>
-                                    <Play className="h-5 w-5 text-blue-500 opacity-0 group-hover:opacity-100 transition-opacity" />
-                                </div>
-                            </div>
-
-                            <div className="border-2 border-dashed border-gray-100 dark:border-gray-700 rounded-xl flex items-center justify-center p-4">
-                                <p className="text-sm text-gray-400">View more in-progress problems</p>
-                            </div>
-                        </div>
-                    </div>
+                    {/* Heatmap Section */}
+                    <HeatMap submissions={user.problemSolved} />
 
                     {/* Recent Activity Section */}
-                    <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
-                        <div className="flex justify-between items-center mb-6">
-                            <div className="flex items-center gap-2">
-                                <TrendingUp className="h-5 w-5 text-purple-500" />
-                                <h2 className="text-xl font-bold text-gray-900 dark:text-white">Recent Activity</h2>
-                            </div>
-                            {/* <button className="text-sm text-blue-500 hover:underline">View All</button> */}
-                        </div>
+                    <RecentActivity problems={user.problemSolved} />
 
-                        {solvedCount > 0 ? (
-                            <div className="space-y-4">
-                                <ActivityItem
-                                    status="Accepted"
-                                    title="Success!"
-                                    description={`You've solved ${solvedCount} problems so far. Keep going!`}
-                                    time="Recently"
-                                    type="success"
-                                />
-                            </div>
-                        ) : (
-                            <div className="text-center py-12 text-gray-500">
-                                <Target className="h-12 w-12 mx-auto mb-4 opacity-20" />
-                                <p>No recent activity yet. Your submissions will appear here!</p>
-                            </div>
-                        )}
-                    </div>
                 </div>
 
                 {/* Sidebar */}
@@ -209,3 +162,4 @@ const ActivityItem = ({ status, title, description, time, type }) => (
 );
 
 export default Dashboard;
+

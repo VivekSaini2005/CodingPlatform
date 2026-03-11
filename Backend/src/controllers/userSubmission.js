@@ -1,3 +1,4 @@
+const User = require("../models/user");
 const Problem = require("../models/problem");
 const Submission = require("../models/submission");
 const { getLanguageById, submitBatch, submitToken } = require("../utils/problemUtility");
@@ -17,6 +18,7 @@ const submitCode = async (req, res) => {
 
         // Fetch problems from the DB to see the hidden testcases
         const problem = await Problem.findById(problemId);
+        // console.log(problem);
 
         // Sumit wala code phale DB mai store kara lo fir Jude0 ko bhejna 
 
@@ -32,15 +34,17 @@ const submitCode = async (req, res) => {
         // baki sari cheeje hm jude0 ke answer lane ke baad karenge
 
         const languageId = await getLanguageById(language);
-
+        // console.log(languageId)
         const submissions = problem.hiddenTestCases.map((testcase) => ({
             source_code: code,
             language_id: languageId,
             stdin: testcase.input,
             expected_output: testcase.output
         }));
+        // console.log(submissions)
 
         const submitResult = await submitBatch(submissions);
+        console.log("afterbatch")
         //extract token
         const resultToken = submitResult.map((value) => value.token);
         //submit token
@@ -83,16 +87,38 @@ const submitCode = async (req, res) => {
         // ProblemId ko insert karenge userSchema ke problemSolved mein if it is not persent there.
 
         // req.result == user Information
-        if (status === 'accepted' && !req.result.problemSolved.includes(problemId)) {
-            req.result.problemSolved.push(problemId);
-            await req.result.save();
+        // update solved problems if accepted
+        if (status === "accepted") {
+
+            const user = await User.findById(userId);
+
+            // check already solved
+            const alreadySolved =
+                user.problemSolved.some(
+                    id => id.toString() === problemId.toString()
+                );
+
+            if (!alreadySolved) {
+                user.problemSolved.push(problemId);
+
+                //important for ranking
+                user.solvedCount += 1;
+
+                // calculate the point of question
+                const points = problem.difficulty === "easy" ? 3 : problem.difficulty === "medium" ? 5 : 7;
+                user.score += points;
+
+                await user.save();
+            }
         }
+
 
         res.status(201).send({ ...submittedResult.toObject(), testResults: testResult });
 
     }
     catch (err) {
-        res.status(500).send("Internal Server Error" + err);
+        console.log(err.message);
+        res.status(500).send("Internal Server Error" + err.errorMessage);
     }
 
 }
