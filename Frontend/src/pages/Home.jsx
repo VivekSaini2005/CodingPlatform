@@ -1,6 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Code, Trophy, Users } from 'lucide-react';
+import { ArrowRight, Bot, Check, Code, MessageSquare, Trophy, Users } from 'lucide-react';
+import problemsImage from '../images/Problems.png';
+import leaderboardImage from '../images/Leaderboard.png';
+import discussionImage from '../images/Discussion.png';
+import aiHelpImage from '../images/AIHelp.png';
 
 const Home = () => {
     return (
@@ -87,39 +91,187 @@ const Home = () => {
 
 
             {/* Feature Section */}
-            <div className="px-6 py-16 lg:px-16 mt-20">
-                <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 md:grid-cols-3">
-                    <div className="rounded-xl border border-gray-200 bg-white p-6 transition hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/10 dark:border-gray-700 dark:bg-gray-900">
-                        <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-500/10 text-blue-500 dark:text-blue-400">
-                            <Code className="h-6 w-6" aria-hidden="true" />
+            <section className="relative top-20 flex flex-col gap-12 py-20 px-6 lg:px-16 ">
+                <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 items-center py-6 md:grid-cols-2 md:py-10">
+                    <div className="order-1 md:order-2">
+                        <div className="mx-auto w-full max-w-[560px] rounded-[2rem] bg-gray-100 p-4 shadow-[0_25px_70px_-35px_rgba(59,130,246,0.35)] transition duration-300 hover:scale-105 dark:bg-gray-800">
+                            <div className="relative overflow-hidden rounded-[1.5rem] border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-900">
+                                <img
+                                    src={problemsImage}
+                                    alt="Problems section preview"
+                                    className="h-[300px] w-full object-cover md:h-[320px]"
+                                />
+                            </div>
                         </div>
-                        <h3 className="mt-5 text-lg font-semibold text-gray-900 dark:text-white">Practice Problems</h3>
-                        <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-                            Solve curated coding challenges across core DSA topics and build consistency with every submission.
-                        </p>
                     </div>
-
-                    <div className="rounded-xl border border-gray-200 bg-white p-6 transition hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/10 dark:border-gray-700 dark:bg-gray-900">
-                        <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-500/10 text-blue-500 dark:text-blue-400">
-                            <Trophy className="h-6 w-6" aria-hidden="true" />
+                    <div className="order-2 md:order-2">
+                        <div className="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-500 font-medium dark:border-blue-500/20 dark:bg-blue-500/10 dark:text-blue-200">
+                            Coding Practice
                         </div>
-                        <h3 className="mt-5 text-lg font-semibold text-gray-900 dark:text-white">Compete & Leaderboard</h3>
-                        <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-                            Track your progress, compete in contests, and measure your performance against other developers.
+                        <h2 className="mt-4 text-2xl font-semibold text-gray-900 dark:text-white md:text-3xl">
+                            Solve Real Coding Problems
+                        </h2>
+                        <p className="mt-3 max-w-xl text-gray-600 dark:text-gray-400">
+                            Practice DSA with structured problems and improve problem-solving skills.
                         </p>
-                    </div>
-
-                    <div className="rounded-xl border border-gray-200 bg-white p-6 transition hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/10 dark:border-gray-700 dark:bg-gray-900">
-                        <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-500/10 text-blue-500 dark:text-blue-400">
-                            <Users className="h-6 w-6" aria-hidden="true" />
+                        <div className="mt-4 space-y-2">
+                            <div className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
+                                <Check className="mt-0.5 h-4 w-4 shrink-0 text-green-500" aria-hidden="true" />
+                                <span>Multiple difficulty levels</span>
+                            </div>
+                            <div className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
+                                <Check className="mt-0.5 h-4 w-4 shrink-0 text-green-500" aria-hidden="true" />
+                                <span>Real interview questions</span>
+                            </div>
+                            <div className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
+                                <Check className="mt-0.5 h-4 w-4 shrink-0 text-green-500" aria-hidden="true" />
+                                <span>Track your progress</span>
+                            </div>
                         </div>
-                        <h3 className="mt-5 text-lg font-semibold text-gray-900 dark:text-white">Discussion & Community</h3>
-                        <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-                            Ask questions, share approaches, and learn faster through an active peer-driven environment.
-                        </p>
+                        <Link
+                            to="/problems"
+                            className="mt-6 inline-block bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 hover:scale-105"
+                        >
+                            Explore Problems -&gt;
+                        </Link>
                     </div>
                 </div>
-            </div>
+
+                <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 items-center py-6 md:grid-cols-2 md:py-10">
+                    <div className="order-1 md:order-2">
+                        <div className="mx-auto w-full max-w-[560px] rounded-[2rem] bg-gray-100 p-4 shadow-[0_25px_70px_-35px_rgba(59,130,246,0.35)] transition duration-300 hover:scale-105 dark:bg-gray-800">
+                            <div className="relative overflow-hidden rounded-[1.5rem] border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-900">
+                                <img
+                                    src={leaderboardImage}
+                                    alt="Leaderboard section preview"
+                                    className="h-[300px] w-full object-cover md:h-[320px]"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="order-2 md:order-1">
+                        <div className="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-500 font-medium dark:border-blue-500/20 dark:bg-blue-500/10 dark:text-blue-200">
+                            Competitive Coding
+                        </div>
+                        <h2 className="mt-4 text-2xl font-semibold text-gray-900 dark:text-white md:text-3xl">
+                            Compete with Top Coders
+                        </h2>
+                        <p className="mt-3 max-w-xl text-gray-600 dark:text-gray-400">
+                            Climb rankings and compare your performance globally.
+                        </p>
+                        <div className="mt-4 space-y-2">
+                            <div className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
+                                <Check className="mt-0.5 h-4 w-4 shrink-0 text-green-500" aria-hidden="true" />
+                                <span>Global rankings</span>
+                            </div>
+                            <div className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
+                                <Check className="mt-0.5 h-4 w-4 shrink-0 text-green-500" aria-hidden="true" />
+                                <span>Weekly contests</span>
+                            </div>
+                            <div className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
+                                <Check className="mt-0.5 h-4 w-4 shrink-0 text-green-500" aria-hidden="true" />
+                                <span>Performance insights</span>
+                            </div>
+                        </div>
+                        <Link
+                            to="/leaderboard"
+                            className="mt-6 inline-block bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 hover:scale-105"
+                        >
+                            View Leaderboard -&gt;
+                        </Link>
+                    </div>
+                </div>
+
+                <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 items-center py-6 md:grid-cols-2 md:py-10">
+                    <div className="order-1 md:order-1">
+                        <div className="mx-auto w-full max-w-[560px] rounded-[2rem] bg-gray-100 p-4 shadow-[0_25px_70px_-35px_rgba(59,130,246,0.35)] transition duration-300 hover:scale-105 dark:bg-gray-800">
+                            <div className="relative overflow-hidden rounded-[1.5rem] border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-900">
+                                <img
+                                    src={discussionImage}
+                                    alt="Discussion section preview"
+                                    className="h-[300px] w-full object-cover md:h-[320px]"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="order-2 md:order-2">
+                        <div className="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-500 font-medium dark:border-blue-500/20 dark:bg-blue-500/10 dark:text-blue-200">
+                            Community
+                        </div>
+                        <h2 className="mt-4 text-2xl font-semibold text-gray-900 dark:text-white md:text-3xl">
+                            Learn with Community
+                        </h2>
+                        <p className="mt-3 max-w-xl text-gray-600 dark:text-gray-400">
+                            Discuss problems, share solutions, and learn from others.
+                        </p>
+                        <div className="mt-4 space-y-2">
+                            <div className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
+                                <Check className="mt-0.5 h-4 w-4 shrink-0 text-green-500" aria-hidden="true" />
+                                <span>Ask doubts</span>
+                            </div>
+                            <div className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
+                                <Check className="mt-0.5 h-4 w-4 shrink-0 text-green-500" aria-hidden="true" />
+                                <span>Share approaches</span>
+                            </div>
+                            <div className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
+                                <Check className="mt-0.5 h-4 w-4 shrink-0 text-green-500" aria-hidden="true" />
+                                <span>Collaborate with peers</span>
+                            </div>
+                        </div>
+                        <Link
+                            to="/discuss"
+                            className="mt-6 inline-block bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 hover:scale-105"
+                        >
+                            Join Discussion -&gt;
+                        </Link>
+                    </div>
+                </div>
+
+                <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 items-center py-6 md:grid-cols-2 md:py-10">
+                    <div className="order-1 md:order-2">
+                        <div className="mx-auto w-full max-w-[560px] rounded-[2rem] bg-gray-100 p-4 shadow-[0_25px_70px_-35px_rgba(59,130,246,0.35)] transition duration-300 hover:scale-105 dark:bg-gray-800">
+                            <div className="relative overflow-hidden rounded-[1.5rem] border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-900">
+                                <img
+                                    src={aiHelpImage}
+                                    alt="AI help section preview"
+                                    className="h-[300px] w-full object-cover md:h-[320px]"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="order-2 md:order-1">
+                        <div className="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-500 font-medium dark:border-blue-500/20 dark:bg-blue-500/10 dark:text-blue-200">
+                            Smart Assistance
+                        </div>
+                        <h2 className="mt-4 text-2xl font-semibold text-gray-900 dark:text-white md:text-3xl">
+                            Get AI-Powered Help
+                        </h2>
+                        <p className="mt-3 max-w-xl text-gray-600 dark:text-gray-400">
+                            Get instant help and explanations using AI.
+                        </p>
+                        <div className="mt-4 space-y-2">
+                            <div className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
+                                <Check className="mt-0.5 h-4 w-4 shrink-0 text-green-500" aria-hidden="true" />
+                                <span>Debug code faster</span>
+                            </div>
+                            <div className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
+                                <Check className="mt-0.5 h-4 w-4 shrink-0 text-green-500" aria-hidden="true" />
+                                <span>Get hints &amp; solutions</span>
+                            </div>
+                            <div className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
+                                <Check className="mt-0.5 h-4 w-4 shrink-0 text-green-500" aria-hidden="true" />
+                                <span>Learn concepts easily</span>
+                            </div>
+                        </div>
+                        <Link
+                            to="/problems"
+                            className="mt-6 inline-block bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 hover:scale-105"
+                        >
+                            Try AI Help -&gt;
+                        </Link>
+                    </div>
+                </div>
+            </section>
 
             {/* CTA Section */}
             <div className="px-6 pb-16 lg:px-16">
