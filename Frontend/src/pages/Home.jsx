@@ -1,12 +1,226 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Bot, Check, Code, MessageSquare, Trophy, Users } from 'lucide-react';
+import Prism from "prismjs";
+import "prismjs/components/prism-clike";
+import "prismjs/components/prism-c";
+import "prismjs/components/prism-cpp";
+import "prismjs/components/prism-java";
+import "prismjs/components/prism-python";
+import "prismjs/components/prism-javascript";
+import "prismjs/themes/prism-tomorrow.css";
 import problemsImage from '../images/Problems.png';
 import leaderboardImage from '../images/Leaderboard.png';
 import discussionImage from '../images/Discussion.png';
 import aiHelpImage from '../images/AIHelp.png';
 
 const Home = () => {
+    const [activeLang, setActiveLang] = useState("cpp");
+    const languageTabs = ["cpp", "java", "python", "javascript"];
+    const typingSteps = {
+    cpp: [
+        { type: "type", text: "class LRUCache {\n" },
+        { type: "type", text: "    list<pair<int,int>> cache;\n" },
+        { type: "type", text: "    unordered_map<int, list<pair<int,int>>::iterator> mp;\n" },
+        { type: "type", text: "    int capacity;\n\n" },
+
+        { type: "type", text: "public:\n" },
+        { type: "type", text: "    LRUCache(int cap) {\n" },
+        { type: "type", text: "        capacity = cap;\n" },
+        { type: "type", text: "    }\n\n" },
+
+        // mistake
+        { type: "type", text: "    int get(int key) {\n" },
+        { type: "type", text: "        if(mp.find(key) == mp.end()) return -1;\n" },
+        { type: "type", text: "        auto node = mp[key];\n" },
+        { type: "delete", count: 6 },
+        { type: "type", text: "        auto it = mp[key];\n" },
+
+        { type: "type", text: "        cache.splice(cache.begin(), cache, it);\n" },
+        { type: "type", text: "        return it->second;\n" },
+        { type: "type", text: "    }\n\n" },
+
+        { type: "type", text: "    void put(int key, int value) {\n" },
+        { type: "type", text: "        if(mp.count(key)) {\n" },
+        { type: "type", text: "            cache.erase(mp[key]);\n" },
+        { type: "type", text: "        }\n" },
+
+        { type: "type", text: "        else if(cache.size() == capacity) {\n" },
+        { type: "type", text: "            int last = cache.back().first;\n" },
+        { type: "type", text: "            cache.pop_back();\n" },
+        { type: "type", text: "            mp.erase(last);\n" },
+        { type: "type", text: "        }\n" },
+
+        { type: "type", text: "        cache.push_front({key, value});\n" },
+        { type: "type", text: "        mp[key] = cache.begin();\n" },
+        { type: "type", text: "    }\n" },
+        { type: "type", text: "};\n" }
+    ],
+
+    java: [
+        { type: "type", text: "class LRUCache {\n" },
+        { type: "type", text: "    private LinkedHashMap<Integer, Integer> map;\n" },
+        { type: "type", text: "    private int capacity;\n\n" },
+
+        { type: "type", text: "    public LRUCache(int capacity) {\n" },
+        { type: "type", text: "        this.capacity = capacity;\n" },
+
+        // mistake
+        { type: "type", text: "        map = new LinkedHashMap<>();\n" },
+        { type: "delete", count: 4 },
+        { type: "type", text: "        map = new LinkedHashMap<>(capacity, 0.75f, true);\n" },
+
+        { type: "type", text: "    }\n\n" },
+
+        { type: "type", text: "    public int get(int key) {\n" },
+        { type: "type", text: "        return map.getOrDefault(key, -1);\n" },
+        { type: "type", text: "    }\n\n" },
+
+        { type: "type", text: "    public void put(int key, int value) {\n" },
+        { type: "type", text: "        map.put(key, value);\n" },
+        { type: "type", text: "        if(map.size() > capacity) {\n" },
+        { type: "type", text: "            int firstKey = map.keySet().iterator().next();\n" },
+        { type: "type", text: "            map.remove(firstKey);\n" },
+        { type: "type", text: "        }\n" },
+        { type: "type", text: "    }\n" },
+        { type: "type", text: "}\n" }
+    ],
+
+    python: [
+        { type: "type", text: "class LRUCache:\n" },
+        { type: "type", text: "    def __init__(self, capacity):\n" },
+        { type: "type", text: "        self.cache = {}\n" },
+        { type: "type", text: "        self.capacity = capacity\n" },
+        { type: "type", text: "        self.order = []\n\n" },
+
+        { type: "type", text: "    def get(self, key):\n" },
+        { type: "type", text: "        if key not in self.cache:\n" },
+        { type: "type", text: "            return -1\n" },
+
+        // mistake
+        { type: "type", text: "        self.order.remove(key)\n" },
+        { type: "delete", count: 5 },
+        { type: "type", text: "        if key in self.order:\n" },
+        { type: "type", text: "            self.order.remove(key)\n" },
+
+        { type: "type", text: "        self.order.insert(0, key)\n" },
+        { type: "type", text: "        return self.cache[key]\n\n" },
+
+        { type: "type", text: "    def put(self, key, value):\n" },
+        { type: "type", text: "        if key in self.cache:\n" },
+        { type: "type", text: "            self.order.remove(key)\n" },
+
+        { type: "type", text: "        elif len(self.cache) == self.capacity:\n" },
+        { type: "type", text: "            lru = self.order.pop()\n" },
+        { type: "type", text: "            del self.cache[lru]\n" },
+
+        { type: "type", text: "        self.cache[key] = value\n" },
+        { type: "type", text: "        self.order.insert(0, key)\n" }
+    ],
+
+    javascript: [
+        { type: "type", text: "class LRUCache {\n" },
+        { type: "type", text: "  constructor(capacity) {\n" },
+        { type: "type", text: "    this.capacity = capacity;\n" },
+        { type: "type", text: "    this.map = new Map();\n" },
+        { type: "type", text: "  }\n\n" },
+
+        { type: "type", text: "  get(key) {\n" },
+        { type: "type", text: "    if (!this.map.has(key)) return -1;\n" },
+
+        // mistake
+        { type: "type", text: "    let value = this.map[key];\n" },
+        { type: "delete", count: 6 },
+        { type: "type", text: "    let value = this.map.get(key);\n" },
+
+        { type: "type", text: "    this.map.delete(key);\n" },
+        { type: "type", text: "    this.map.set(key, value);\n" },
+        { type: "type", text: "    return value;\n" },
+        { type: "type", text: "  }\n\n" },
+
+        { type: "type", text: "  put(key, value) {\n" },
+        { type: "type", text: "    if (this.map.has(key)) this.map.delete(key);\n" },
+        { type: "type", text: "    this.map.set(key, value);\n" },
+
+        { type: "type", text: "    if (this.map.size > this.capacity) {\n" },
+        { type: "type", text: "      const firstKey = this.map.keys().next().value;\n" },
+        { type: "type", text: "      this.map.delete(firstKey);\n" },
+        { type: "type", text: "    }\n" },
+        { type: "type", text: "  }\n" },
+        { type: "type", text: "}\n" }
+    ]
+    };
+    const [code, setCode] = useState("");
+    const [stepIndex, setStepIndex] = useState(0);
+    const [charIndex, setCharIndex] = useState(0);
+    const langMap = {
+        cpp: "cpp",
+        java: "java",
+        python: "python",
+        javascript: "javascript"
+    };
+    const lines = code.split("\n");
+    const highlightedCode = Prism.highlight(
+        code,
+        Prism.languages[langMap[activeLang]] || Prism.languages.javascript,
+        langMap[activeLang] || "javascript"
+    );
+
+    useEffect(() => {
+        const steps = typingSteps[activeLang];
+        if (!steps || !steps.length) return;
+        if (stepIndex >= steps.length) {
+            setTimeout(() => {
+                setStepIndex(0);
+                setCharIndex(0);
+                setCode(""); // optional (remove if you want freeze)
+            }, 2000);
+            return;
+        }
+
+        const step = steps[stepIndex];
+        if (!step) return;
+
+        let timeout;
+
+        if (step.type === "type") {
+            if (charIndex < step.text.length) {
+                timeout = setTimeout(() => {
+                    setCode(prev => prev + step.text[charIndex]);
+                    setCharIndex(charIndex + 1);
+                }, 45);
+            } else {
+                timeout = setTimeout(() => {
+                    setStepIndex(stepIndex + 1);
+                    setCharIndex(0);
+                }, 300);
+            }
+        }
+
+        else if (step.type === "delete") {
+            if (charIndex < step.count) {
+                timeout = setTimeout(() => {
+                    setCode(prev => prev.slice(0, -1));
+                    setCharIndex(charIndex + 1);
+                }, 40);
+            } else {
+                timeout = setTimeout(() => {
+                    setStepIndex(stepIndex + 1);
+                    setCharIndex(0);
+                }, 300);
+            }
+        }
+
+        return () => clearTimeout(timeout);
+
+    }, [charIndex, stepIndex, activeLang]);
+
+    useEffect(() => {
+        setCode("");
+        setStepIndex(0);
+        setCharIndex(0);
+    }, [activeLang]);
+
     return (
         <div className="min-h-screen bg-(--page-bg) [--page-bg:#f9fafb] dark:[--page-bg:#020617] text-gray-900 dark:text-white">
             {/* Hero Section */}
@@ -269,6 +483,62 @@ const Home = () => {
                         >
                             Try AI Help -&gt;
                         </Link>
+                    </div>
+                </div>
+            </section>
+
+            {/* Developer Experience Section */}
+            <section className="py-20 px-6 lg:px-16 text-center">
+                <div className="max-w-6xl mx-auto">
+                    <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-r from-blue-500 to-indigo-500 text-white">
+                        <Code className="h-7 w-7" aria-hidden="true" />
+                    </div>
+                    <h2 className="mt-4 text-2xl font-semibold text-gray-900 dark:text-white md:text-3xl">
+                        Developer Experience
+                    </h2>
+                    <p className="mx-auto mt-3 max-w-2xl text-gray-500 dark:text-gray-400">
+                        Write, run, and iterate in a workspace designed for clarity. Focus on solving problems while the platform handles the workflow around you.
+                    </p>
+
+                    <div className="max-w-3xl mx-auto mt-12">
+                        <div className="bg-white dark:bg-[#1e1e1e] text-gray-800 dark:text-gray-200 font-mono text-sm rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden text-left">
+                            <div className="flex justify-center items-center gap-6 px-4 py-3 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-sm font-medium">
+                                <div className="text-sm flex gap-4 text-gray-600 dark:text-gray-300">
+                                    {languageTabs.map((lang) => (
+                                        <button
+                                            key={lang}
+                                            type="button"
+                                            onClick={() => setActiveLang(lang)}
+                                            className={
+                                                activeLang === lang
+                                                    ? "text-blue-500 border-b-2 border-blue-500 pb-1"
+                                                    : "text-gray-500 hover:text-blue-400"
+                                            }
+                                        >
+                                            {lang === "cpp"
+                                                ? "C++"
+                                                : lang === "javascript"
+                                                    ? "JavaScript"
+                                                    : lang.charAt(0).toUpperCase() + lang.slice(1)}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                            <div className="p-4 h-[260px] overflow-auto bg-gray-50 dark:bg-[#1e1e1e]">
+                                <div className="flex">
+                                    <div className="text-gray-500 dark:text-gray-400 pr-4 text-right select-none">
+                                        {lines.map((_, i) => (
+                                            <div key={i}>{i + 1}</div>
+                                        ))}
+                                    </div>
+
+                                    <pre className="flex-1 whitespace-pre-wrap leading-relaxed text-gray-800 dark:text-gray-200">
+                                        <code dangerouslySetInnerHTML={{ __html: highlightedCode }} />
+                                        <span className="animate-pulse">|</span>
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
