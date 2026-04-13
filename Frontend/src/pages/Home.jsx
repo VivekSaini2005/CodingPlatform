@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Bot, Check, Code, MessageSquare, Trophy, Users } from 'lucide-react';
 import Prism from "prismjs";
@@ -153,6 +153,7 @@ const Home = () => {
     const [code, setCode] = useState("");
     const [stepIndex, setStepIndex] = useState(0);
     const [charIndex, setCharIndex] = useState(0);
+    const editorScrollRef = useRef(null);
     const langMap = {
         cpp: "cpp",
         java: "java",
@@ -220,6 +221,12 @@ const Home = () => {
         setStepIndex(0);
         setCharIndex(0);
     }, [activeLang]);
+
+    useEffect(() => {
+        if (editorScrollRef.current) {
+            editorScrollRef.current.scrollTop = editorScrollRef.current.scrollHeight;
+        }
+    }, [code]);
 
     return (
         <div className="min-h-screen bg-(--page-bg) [--page-bg:#f9fafb] dark:[--page-bg:#020617] text-gray-900 dark:text-white">
@@ -524,7 +531,7 @@ const Home = () => {
                                     ))}
                                 </div>
                             </div>
-                            <div className="p-4 h-[260px] overflow-auto bg-gray-50 dark:bg-[#1e1e1e]">
+                            <div ref={editorScrollRef} className="p-4 h-[260px] overflow-auto bg-gray-50 dark:bg-[#1e1e1e]">
                                 <div className="flex">
                                     <div className="text-gray-500 dark:text-gray-400 pr-4 text-right select-none">
                                         {lines.map((_, i) => (
