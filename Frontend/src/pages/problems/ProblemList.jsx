@@ -9,14 +9,18 @@ import baseimage from "../../images/ProblemBG.jpg"
 const ProblemList = () => {
 
     const companies = [
-        { name: 'Google', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/google.svg' },
-        { name: 'Microsoft', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/microsoft.svg' },
-        { name: 'Amazon', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/amazon.svg' },
-        { name: 'Meta', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/meta.svg' },
-        { name: 'Netflix', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/netflix.svg' },
-        { name: 'LinkedIn', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linkedin.svg' },
-        { name: 'YouTube', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/youtube.svg' },
-        { name: 'Instagram', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/instagram.svg' }
+        { name: 'Google', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg' },
+        { name: 'Microsoft', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg' },
+        { name: 'Amazon', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg' },
+        { name: 'Meta', logo: 'https://upload.wikimedia.org/wikipedia/commons/0/05/Meta_Platforms_Inc._logo.svg' },
+        { name: 'Netflix', logo: 'https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg' },
+        { name: 'LinkedIn', logo: 'https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png' },
+        { name: 'YouTube', logo: 'https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg' },
+        { name: 'Instagram', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png' },
+        { name: 'Apple', logo: 'https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg' },
+        { name: 'Adobe', logo: 'https://upload.wikimedia.org/wikipedia/commons/7/7b/Adobe_Systems_logo_and_wordmark.svg' },
+        { name: 'Uber', logo: 'https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png' },
+        { name: 'Spotify', logo: 'https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg' }
     ];
 
     const [problems, setProblems] = useState([]);
@@ -110,14 +114,14 @@ const ProblemList = () => {
         <div className="w-full page-fade-in bg-white dark:bg-gray-900">
             <div className="relative">
                 <section
-                    className="relative w-full h-[100vh] md:h-[100vh] lg:h-[100vh] bg-cover bg-center bg-no-repeat"
+                    className="relative w-full h-[100vh] md:h-[100vh] lg:h-[100vh] pb-20 md:pb-24 bg-cover bg-center bg-no-repeat brightness-110 contrast-110"
                     style={{
                         backgroundImage: `url(${baseimage})`
                     }}
                 >
-                    {/* <div className="absolute inset-0 bg-white/60 dark:bg-black/60 backdrop-blur-[1px]"></div> */}
+                    <div className="absolute inset-0 bg-black/30 dark:bg-transparent"></div>
                     {/* <div className="absolute inset-0 bg-gradient-to-r from-white/70 via-white/40 to-transparent dark:from-black/70 dark:via-black/40"></div> */}
-                    <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-white via-white/70 to-transparent dark:from-gray-950 dark:via-gray-950/70 dark:to-transparent z-[5]" />
+                    <div className="absolute bottom-0 left-0 w-full h-20 md:h-24 bg-gradient-to-t from-white via-white/40 to-transparent dark:hidden z-[5]" />
 
                     <div className="absolute z-10 flex flex-col justify-center h-full px-8 md:px-16 hero-content-fade-in">
                         <div className="max-w-2xl">
@@ -139,25 +143,28 @@ const ProblemList = () => {
 
                 <div className="max-w-7xl mx-auto mt-12 px-6 py-6 md:px-10 space-y-6">
 
-                <div id="problems-section" className="relative z-20 -mt-16 md:-mt-20 max-w-6xl mx-auto">
+                <div id="problems-section" className="relative z-20 max-w-6xl mx-auto mt-[-84px] md:mt-[-110px]">
                     <div className="p-[1px] rounded-xl bg-gradient-to-r from-blue-500/30 via-purple-500/20 to-transparent transition hover:-translate-y-1">
-                        <div className="rounded-xl bg-white dark:bg-gray-900 backdrop-blur-md border border-gray-200 dark:border-gray-800 shadow-lg dark:shadow-black/30 p-5 md:p-6">
-                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 items-center justify-items-center">
+                        <div className="rounded-xl bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border border-gray-200 dark:border-gray-800 shadow-lg px-6 py-6 md:px-10">
+                            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-6 md:gap-8 justify-items-center items-center">
                                 {companies.map((company) => (
                                     <div
                                         key={company.name}
-                                        className="flex items-center gap-2 justify-center text-gray-600 dark:text-gray-400 opacity-70 hover:opacity-100 transition-all duration-200"
+                                        data-company-item
+                                        className="flex justify-center items-center opacity-90 hover:opacity-100 hover:scale-105 transition duration-200"
                                     >
-                                        <img
-                                            src={company.logo}
-                                            alt={`${company.name} logo`}
-                                            className="h-5 w-5 object-contain grayscale hover:grayscale-0 transition-all duration-200"
-                                            loading="lazy"
-                                            onError={(e) => {
-                                                e.currentTarget.style.display = 'none';
-                                            }}
-                                        />
-                                        <span className="text-sm font-medium">{company.name}</span>
+                                        <div className="w-[90px] flex justify-center px-3 py-2 rounded-md bg-white/80 dark:bg-white/90 backdrop-blur-sm border border-gray-200/70 dark:border-gray-700/60 shadow-sm">
+                                            <img
+                                                src={company.logo}
+                                                alt={`${company.name} logo`}
+                                                className="h-6 md:h-7 max-w-[80px] object-contain"
+                                                loading="lazy"
+                                                onError={(e) => {
+                                                    const item = e.currentTarget.closest('[data-company-item]');
+                                                    if (item) item.style.display = 'none';
+                                                }}
+                                            />
+                                        </div>
                                     </div>
                                 ))}
                             </div>
