@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getAllProblems } from '../../api/problem.api';
 import { Link } from 'react-router-dom';
-import { Loader2, Search, Tag, CheckCircle2 } from 'lucide-react';
+import { Loader2, Search, Tag, CheckCircle2, Circle, ArrowUp, ArrowDown } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useSearchParams } from "react-router-dom";
 import baseimage from "../../images/ProblemBG.jpg"
@@ -57,6 +57,17 @@ const ProblemList = () => {
 
     // Unique tags
     const allTags = ["All", ...new Set(problems.map(p => p.tags).filter(Boolean))];
+    const tagCounts = problems.reduce((counts, problem) => {
+        if (problem.tags) {
+            counts[problem.tags] = (counts[problem.tags] || 0) + 1;
+        }
+        return counts;
+    }, { All: problems.length });
+    const difficultyPills = [
+        { label: 'All', value: null, icon: Tag },
+        { label: 'Easy to Hard', value: 'asc', icon: ArrowUp },
+        { label: 'Hard to Easy', value: 'desc', icon: ArrowDown },
+    ];
 
     // Sorting
     let filteredProblems = problems.filter(problem =>
@@ -87,10 +98,10 @@ const ProblemList = () => {
 
     const getDifficultyColor = (difficulty) => {
         switch (difficulty.toLowerCase()) {
-            case 'easy': return 'text-green-300 bg-green-500/20 border border-green-500/40';
-            case 'medium': return 'text-yellow-300 bg-yellow-500/20 border border-yellow-500/40';
-            case 'hard': return 'text-red-300 bg-red-500/20 border border-red-500/40';
-            default: return 'text-gray-300 bg-gray-700 border border-gray-600';
+            case 'easy': return 'text-green-600 bg-green-50 dark:bg-green-500/10 border border-green-100 dark:border-green-500/20';
+            case 'medium': return 'text-yellow-500 bg-yellow-50 dark:bg-yellow-500/10 border border-yellow-100 dark:border-yellow-500/20';
+            case 'hard': return 'text-red-500 bg-red-50 dark:bg-red-500/10 border border-red-100 dark:border-red-500/20';
+            default: return 'text-gray-500 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700';
         }
     };
 
@@ -111,24 +122,23 @@ const ProblemList = () => {
     }
 
     return (
-        <div className="w-full page-fade-in bg-white dark:bg-gray-900">
+        <div className="w-full min-h-screen page-fade-in bg-white dark:bg-gray-900 pb-12">
             <div className="relative">
                 <section
-                    className="relative w-full h-[100vh] md:h-[100vh] lg:h-[100vh] pb-20 md:pb-24 bg-cover bg-center bg-no-repeat brightness-110 contrast-110"
+                    className="relative w-full h-[100vh] md:h-[100vh] lg:h-[100vh] pb-10 md:pb-12 bg-cover bg-center bg-no-repeat brightness-110 contrast-110"
                     style={{
                         backgroundImage: `url(${baseimage})`
                     }}
                 >
-                    <div className="absolute inset-0 bg-black/30 dark:bg-transparent"></div>
+                    {/* <div className="absolute inset-0 bg-black/30 dark:bg-transparent"></div> */}
                     {/* <div className="absolute inset-0 bg-gradient-to-r from-white/70 via-white/40 to-transparent dark:from-black/70 dark:via-black/40"></div> */}
-                    <div className="absolute bottom-0 left-0 w-full h-20 md:h-24 bg-gradient-to-t from-white via-white/40 to-transparent dark:hidden z-[5]" />
-
+                    <div className="absolute bottom-0 left-0 w-full h-14 md:h-16 bg-gradient-to-t from-white via-white/40 to-transparent dark:from-gray-900 dark:via-gray-900/60 dark:to-transparent z-[5]" />
                     <div className="absolute z-10 flex flex-col justify-center h-full px-8 md:px-16 hero-content-fade-in">
                         <div className="max-w-2xl">
-                            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white drop-shadow-lg">
+                            <h2 className="text-4xl md:text-5xl font-bold text-white dark:text-white drop-shadow-lg">
                                 Solve FAANG-Level Problems
                             </h2>
-                            <p className="text-gray-700 dark:text-gray-300 mt-3 text-lg drop-shadow-lg">
+                            <p className="text-white dark:text-gray-300 mt-3 text-lg drop-shadow-lg">
                                 Practice real interview questions from top tech companies
                             </p>
                             <a
@@ -141,10 +151,10 @@ const ProblemList = () => {
                     </div>
                 </section>
 
-                <div className="max-w-7xl mx-auto mt-12 px-6 py-6 md:px-10 space-y-6">
+                <div className="max-w-7xl mx-auto px-6 mt-12 space-y-6">
 
                 <div id="problems-section" className="relative z-20 max-w-6xl mx-auto mt-[-84px] md:mt-[-110px]">
-                    <div className="p-[1px] rounded-xl bg-gradient-to-r from-blue-500/30 via-purple-500/20 to-transparent transition hover:-translate-y-1">
+                    <div className="p-[1px] rounded-xl bg-gradient-to-r from-blue-500/30 via-purple-500/20 to-transparent transition hover:-translate-y-1 ">
                         <div className="rounded-xl bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border border-gray-200 dark:border-gray-800 shadow-lg px-6 py-6 md:px-10">
                             <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-6 md:gap-8 justify-items-center items-center">
                                 {companies.map((company) => (
@@ -179,86 +189,116 @@ const ProblemList = () => {
                     Problems
                 </h1>
 
-                <div className="bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-3 flex flex-col md:flex-row gap-4 items-center transition-all duration-200">
+                <div className="flex flex-wrap gap-3 items-center mb-4">
+                    {allTags.map((tag) => {
+                        const isActive = selectedTag === tag;
+                        const count = tag === "All" ? tagCounts.All : tagCounts[tag] || 0;
 
-                    <div className="w-full flex-1 flex items-center gap-2 rounded-md bg-white dark:bg-gray-800 px-2 py-1 transition-all duration-200 focus-within:ring-2 focus-within:ring-blue-500">
-                        <Search className="h-5 w-5 text-gray-600 dark:text-gray-400" />
+                        return (
+                            <button
+                                key={tag}
+                                type="button"
+                                onClick={() => setSelectedTag(tag)}
+                                className={`px-3 py-1 rounded-full text-sm bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer transition shadow-sm ${isActive ? 'bg-gray-200 dark:bg-gray-700 shadow-sm' : ''}`}
+                            >
+                                {tag}
+                                <span className="ml-1 text-xs px-2 py-[2px] rounded-full bg-gray-200 dark:bg-gray-700">
+                                    {count}
+                                </span>
+                            </button>
+                        );
+                    })}
+                </div>
+
+                <div className="flex flex-wrap gap-3 mt-4">
+                    {difficultyPills.map(({ label, value, icon: Icon }) => {
+                        const isActive = difficultyOrder === value;
+
+                        return (
+                            <button
+                                key={label}
+                                type="button"
+                                onClick={() => setDifficultyOrder(value)}
+                                className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer transition shadow-sm ${isActive ? 'bg-white dark:bg-gray-700 shadow-md' : ''}`}
+                            >
+                                <Icon className="w-4 h-4" />
+                                {label}
+                            </button>
+                        );
+                    })}
+                </div>
+
+                <div className="flex items-center justify-between mt-6 gap-4 flex-col lg:flex-row">
+                    <div className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded-full w-full max-w-md shadow-sm">
+                        <Search className="h-4 w-4 text-gray-500 dark:text-gray-400" />
                         <input
                             type="text"
-                            className="flex-1 bg-transparent outline-none text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-all duration-200"
+                            className="w-full bg-transparent outline-none text-sm text-gray-700 dark:text-gray-300 placeholder-gray-500 dark:placeholder-gray-400"
                             placeholder="Search problems..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
                     </div>
 
-                    <select
-                        value={difficultyOrder || ""}
-                        onChange={(e) => setDifficultyOrder(e.target.value || null)}
-                        className="w-full md:w-auto bg-white dark:bg-gray-900 text-gray-900 dark:text-white px-3 py-2 rounded-md border border-gray-200 dark:border-gray-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    >
-                        <option value="">Difficulty</option>
-                        <option value="asc">Easy to Hard</option>
-                        <option value="desc">Hard to Easy</option>
-                    </select>
+                    <div className="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">
+                        <span>{user?.problemSolved?.length || 0}/{problems.length} Solved</span>
+                        <button
+                            type="button"
+                            className="inline-flex items-center justify-center h-9 w-9 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition shadow-sm"
+                            aria-label="Filter"
+                        >
+                            <Tag className="h-4 w-4" />
+                        </button>
+                        <button
+                            type="button"
+                            className="inline-flex items-center justify-center h-9 w-9 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition shadow-sm"
+                            aria-label="Sort"
+                        >
+                            <ArrowUp className="h-4 w-4" />
+                        </button>
+                    </div>
                 </div>
 
-                <div className="mt-6 space-y-3">
+                <div className="mt-6 rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden bg-white dark:bg-gray-900 shadow-sm">
+                    <div className="divide-y divide-gray-100 dark:divide-gray-800 pb-0">
 
                     {filteredProblems.map((problem) => (
                         <div
                             key={problem._id}
-                            className="bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-4 md:px-6 py-4 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-200 hover:scale-[1.01] hover:shadow-xl"
+                            className="flex items-center justify-between gap-6 px-6 py-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
                         >
-                            <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+                            <div className="flex items-center gap-3 min-w-0 flex-1 text-left">
+                                {user?.problemSolved?.some(
+                                    (p) => p._id === problem._id
+                                ) ? (
+                                    <CheckCircle2 className="w-4 h-4 text-green-500 shrink-0 align-middle" />
+                                ) : (
+                                    <Circle className="w-4 h-4 text-gray-400 dark:text-gray-500 shrink-0 align-middle" />
+                                )}
 
-                                <div className="flex items-center gap-4 min-w-0">
-                                    {user?.problemSolved?.some(
-                                        (p) => p._id === problem._id
-                                    ) ? (
-                                        <CheckCircle2 className="h-5 w-5 text-green-400" />
-                                    ) : (
-                                        <div className="h-2.5 w-2.5 rounded-full bg-gray-500"></div>
-                                    )}
+                                <Link
+                                    to={`/problems/${problem._id}`}
+                                    className="block min-w-0 text-sm font-medium text-left text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-300 truncate transition-colors duration-200"
+                                >
+                                    {problem.title}
+                                </Link>
+                            </div>
 
-                                    <div className="min-w-0">
-                                        <Link
-                                            to={`/problems/${problem._id}`}
-                                            className="block text-base md:text-lg font-bold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-300 truncate transition-colors duration-200"
-                                        >
-                                            {problem.title}
-                                        </Link>
+                            <div className="flex items-center justify-end shrink-0">
+                                <Link
+                                    to={`/problems/${problem._id}`}
+                                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-xs font-medium transition-all duration-200 hover:scale-105"
+                                >
+                                    Solve
+                                </Link>
+                            </div>
 
-                                        <span
-                                            className={`inline-flex mt-2 px-2.5 py-1 rounded text-xs font-semibold ${getDifficultyColor(problem.difficulty)}`}
-                                        >
-                                            {problem.difficulty}
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-center justify-start md:justify-center gap-2 md:flex-1">
-                                    {problem.tags ? (
-                                        <span className="inline-flex items-center bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded text-xs text-gray-700 dark:text-gray-100">
-                                            <Tag className="w-3.5 h-3.5 mr-1" />
-                                            {problem.tags}
-                                        </span>
-                                    ) : (
-                                        <span className="inline-flex items-center bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded text-xs text-gray-600 dark:text-gray-400">
-                                            No Tag
-                                        </span>
-                                    )}
-                                </div>
-
-                                <div className="flex justify-start md:justify-end">
-                                    <Link
-                                        to={`/problems/${problem._id}`}
-                                        className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 hover:scale-105"
-                                    >
-                                        Solve
-                                    </Link>
-                                </div>
-
+                            <div className="flex items-center justify-end w-32 shrink-0">
+                                <span
+                                    className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${getDifficultyColor(problem.difficulty)}`}
+                                >
+                                    {problem.difficulty}
+                                </span>
                             </div>
                         </div>
                     ))}
@@ -269,6 +309,7 @@ const ProblemList = () => {
                         </div>
                     )}
 
+                    </div>
                 </div>
 
                 </div>
