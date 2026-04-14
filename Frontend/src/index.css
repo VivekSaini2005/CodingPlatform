@@ -1,3 +1,51 @@
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+@keyframes company-marquee {
+	0% {
+		transform: translateX(-50%);
+	}
+
+	100% {
+		transform: translateX(0%);
+	}
+}
+
+.company-marquee-track {
+	width: max-content;
+	animation: company-marquee 18s linear infinite;
+	will-change: transform;
+}
+
+@keyframes page-fade-in {
+	0% {
+		opacity: 0;
+		transform: translateY(6px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.page-fade-in {
+	animation: page-fade-in 360ms ease-out;
+}
+
+@keyframes hero-content-fade-in {
+	0% {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.hero-content-fade-in {
+	animation: hero-content-fade-in 520ms ease-out;
+}
