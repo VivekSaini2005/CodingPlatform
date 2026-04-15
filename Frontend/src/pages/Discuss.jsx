@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { getPostsAPI, createPostAPI } from "../api/discussion.api";
 import PostCard from "../components/PostCard";
-import { Search, Plus } from "lucide-react";
+import { Search, CheckCircle2, X } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
+import discussionHeroBg from "../images/DisscussionHero.webp";
 
 const DiscussPage = () => {
   const [posts, setPosts] = useState([]);
@@ -62,36 +63,66 @@ const DiscussPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-[#0f111a] text-gray-900 dark:text-white p-8 font-sans transition-colors duration-200">
-      <div className="max-w-4xl mx-auto">
-
-        {/* Header Section */}
-        <div className="flex justify-between items-start mb-6">
-          <div>
-            <h1 className="text-3xl font-bold mb-2">Discussions</h1>
-            <p className="text-gray-600 dark:text-gray-400">Share knowledge and learn from the community</p>
-          </div>
-          <button
-            onClick={() => setShowCreateForm(!showCreateForm)}
-            className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md flex items-center gap-2 font-medium transition-colors"
-          >
-            <Plus size={20} />
-            New Discussion
-          </button>
-        </div>
-
-        {/* Search Bar */}
-        <div className="relative mb-8">
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+      {/* Hero Section */}
+      <div
+        className="w-full relative overflow-hidden flex flex-col items-center justify-center text-center py-16 md:py-20 lg:py-24 px-4 gap-4 mb-10 md:mb-16 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${discussionHeroBg})` }}
+      >
+        {/* <div className="absolute inset-0 bg-black/40 dark:bg-black/55" /> */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/35 to-black/45" />
+        <h1 className="relative z-10 text-3xl md:text-5xl font-bold tracking-tight text-white">
+          Discussion Hub
+        </h1>
+        <p className="relative z-10 mt-3 text-gray-100/95 dark:text-gray-200/90 max-w-xl text-sm md:text-base">
+          Ask questions, share knowledge, and collaborate with developers
+        </p>
+        <div className="relative z-10 w-full max-w-xl mt-4">
+          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
             <Search className="text-gray-400" size={20} />
           </div>
           <input
             type="text"
-            className="w-full bg-white dark:bg-[#1e2332] text-gray-900 dark:text-white rounded-lg py-3 pl-10 pr-4 focus:outline-none focus:ring-1 focus:ring-gray-400 dark:focus:ring-gray-500 placeholder-gray-400 dark:placeholder-gray-500 border border-gray-200 dark:border-[#2d3348] transition-colors"
+            className="w-full bg-white/95 dark:bg-gray-900/85 text-gray-900 dark:text-white rounded-lg py-3 pl-11 pr-4 border border-gray-200/80 dark:border-gray-700/80 focus:outline-none focus:ring-2 focus:ring-blue-400/70 dark:focus:ring-blue-500/60 shadow-lg backdrop-blur-sm"
             placeholder="Search discussions..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
+      </div>
+
+      <div className="w-full mb-10 md:mb-12">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="bg-white/95 dark:bg-[#131722] border border-gray-200 dark:border-gray-800 rounded-xl px-4 py-4 md:px-6 md:py-5 shadow-sm">
+            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+              <div className="flex flex-wrap items-center gap-4 md:gap-6 text-sm">
+                <div className="flex items-center gap-2 text-gray-700 dark:text-gray-200">
+                  <CheckCircle2 size={18} className="text-blue-600 dark:text-blue-400" />
+                  <span>Ask questions and help others</span>
+                </div>
+                <div className="flex items-center gap-2 text-gray-700 dark:text-gray-200">
+                  <CheckCircle2 size={18} className="text-blue-600 dark:text-blue-400" />
+                  <span>Discuss subjects you're studying</span>
+                </div>
+                <div className="flex items-center gap-2 text-gray-700 dark:text-gray-200">
+                  <CheckCircle2 size={18} className="text-blue-600 dark:text-blue-400" />
+                  <span>Meet learners around the world</span>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => setShowCreateForm(!showCreateForm)}
+                  className="px-5 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition-all duration-200 hover:shadow-md"
+                >
+                  Ask your question
+                </button>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-6xl mx-auto px-4 w-full">
 
         {/* Create Post Form (Inline Modal alternative) */}
         {showCreateForm && (
