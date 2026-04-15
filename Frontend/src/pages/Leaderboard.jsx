@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axiosInstance from "../api/axiosInstance";
 import { Trophy, Medal, Award } from "lucide-react";
 import PodiumCard from "../components/PodiumCard";
+import LeaderboardTrendChart from "../components/LeaderboardTrendChart";
 
 export default function LeaderboardPage() {
 
@@ -34,7 +35,25 @@ export default function LeaderboardPage() {
     const top3 = users.slice(0, 3);
 
     return (
-        <div className="max-w-6xl mx-auto px-6 py-8">
+        <>
+            <section className="relative overflow-hidden w-full py-12 md:py-16 px-6 md:px-12 bg-linear-to-b from-white via-gray-50 to-transparent dark:from-[#020617] dark:via-[#020617] dark:to-transparent border-b border-gray-200 dark:border-white/10">
+                <div className="relative z-10 max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10">
+                    <div className="w-full md:w-1/2 max-w-xl text-center md:text-left space-y-3">
+                        <h1 className="text-4xl md:text-5xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">
+                            Global Leaderboard
+                        </h1>
+                        <p className="text-gray-500 dark:text-gray-400 text-lg max-w-xl mx-auto md:mx-0">
+                            Compete with top programmers and climb the ranks
+                        </p>
+                    </div>
+
+                    <div className="w-full md:w-112.5">
+                        <LeaderboardTrendChart />
+                    </div>
+                </div>
+            </section>
+
+            <div className="max-w-6xl mx-auto px-6 py-8">
 
             <div className="mb-10 text-center">
                 <h1 className="text-4xl font-extrabold mb-3 text-gray-900 dark:text-white tracking-tight">Leaderboard</h1>
@@ -144,6 +163,7 @@ export default function LeaderboardPage() {
 
             </div>
 
-        </div>
+            </div>
+        </>
     );
 }

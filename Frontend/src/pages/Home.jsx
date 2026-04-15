@@ -12,7 +12,7 @@ import "prismjs/themes/prism-tomorrow.css";
 import problemsImage from '../images/Problems.png';
 import leaderboardImage from '../images/Leaderboard.png';
 import discussionImage from '../images/Discussion.png';
-import aiHelpImage from '../images/AIHelp.png';
+import aiHelpImage from '../images/AiHelp.png';
 
 const Home = () => {
     const [activeLang, setActiveLang] = useState("cpp");
