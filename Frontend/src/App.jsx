@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import Home from './pages/Home';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
@@ -44,6 +45,7 @@ function App() {
                         <Route path="/admin/video" element={<AdminVideo />} />
                         {/* Add more routes here as needed */}
                     </Routes>
+                    <Footer />
                 </div>
             </AuthProvider>
         </ThemeProvider>
