@@ -1,160 +1,153 @@
-import { FaGithub, FaLinkedin, FaXTwitter } from 'react-icons/fa6';
+import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer 
-      className="relative bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950 text-gray-700 dark:text-gray-300"
+    <footer
+      className="relative overflow-hidden border-t border-gray-200/70 bg-linear-to-b from-slate-50 via-white to-slate-100 text-gray-700 shadow-[0_-1px_0_rgba(15,23,42,0.04)] dark:border-gray-800 dark:from-gray-950 dark:via-gray-950 dark:to-gray-900 dark:text-gray-300"
       style={{
-        backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0)',
-        backgroundSize: '40px 40px'
+        backgroundImage:
+          "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.06) 1px, transparent 0)",
+        backgroundSize: "38px 38px",
       }}
     >
-      {/* Main Footer Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 lg:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-          {/* Brand Section */}
-          <div className="space-y-5 text-center md:text-left">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">
-              Coding Platform
-            </h2>
-            <p className="text-sm font-semibold text-blue-600 dark:text-blue-400 tracking-wide transition-all duration-200 ease-in-out">
-              Practice. Compete. Grow.
-            </p>
-            <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed transition-all duration-200 ease-in-out">
-              Master your coding skills through problems, contests, and community
-              discussions.
-            </p>
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:py-14">
+        <div className="grid gap-8 lg:grid-cols-[1.35fr_1fr]">
+          <div className="rounded-3xl border border-white/70 bg-white/70 p-6 shadow-[0_18px_50px_rgba(15,23,42,0.07)] backdrop-blur dark:border-gray-800 dark:bg-[#111827]">
+            <div className="flex flex-col gap-5 text-center sm:text-left">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.35em] text-blue-600 dark:text-blue-400">
+                  Coding Platform
+                </p>
+                <h2 className="mt-3 text-2xl font-semibold tracking-tight text-gray-950 dark:text-white sm:text-3xl">
+                  Build skill, speed, and confidence in one place.
+                </h2>
+                <p className="mt-3 max-w-2xl text-sm leading-6 text-gray-600 dark:text-gray-400">
+                  Solve curated problems, climb leaderboards, join discussions,
+                  and track your progress with a workspace designed for focused
+                  practice.
+                </p>
+              </div>
+
+              <div className="grid gap-3 sm:grid-cols-3">
+                <div className="rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 text-left dark:border-gray-800 dark:bg-[#111827]">
+                  <p className="text-[11px] font-medium uppercase tracking-[0.28em] text-gray-500 dark:text-gray-500">
+                    Problems
+                  </p>
+                  <p className="mt-2 text-sm font-semibold text-gray-900 dark:text-white">
+                    Practice by topic
+                  </p>
+                </div>
+                <div className="rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 text-left dark:border-gray-800 dark:bg-[#111827]">
+                  <p className="text-[11px] font-medium uppercase tracking-[0.28em] text-gray-500 dark:text-gray-500">
+                    Community
+                  </p>
+                  <p className="mt-2 text-sm font-semibold text-gray-900 dark:text-white">
+                    Discuss, compare, improve
+                  </p>
+                </div>
+                <div className="rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 text-left dark:border-gray-800 dark:bg-[#111827]">
+                  <p className="text-[11px] font-medium uppercase tracking-[0.28em] text-gray-500 dark:text-gray-500">
+                    Progress
+                  </p>
+                  <p className="mt-2 text-sm font-semibold text-gray-900 dark:text-white">
+                    Learn with momentum
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* Navigation Links */}
-          <div className="space-y-5 text-center md:text-left">
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-white tracking-wide uppercase letter-spacing-1 transition-all duration-200 ease-in-out">
-              Navigation
-            </h3>
-            <ul className="space-y-3">
-              <li>
-                <a
-                  href="/problems"
-                  className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:translate-x-1 transition-all duration-200 ease-in-out inline-block"
-                >
-                  Problems
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/leaderboard"
-                  className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:translate-x-1 transition-all duration-200 ease-in-out inline-block"
-                >
-                  Leaderboard
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/discuss"
-                  className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:translate-x-1 transition-all duration-200 ease-in-out inline-block"
-                >
-                  Discuss
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/profile"
-                  className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:translate-x-1 transition-all duration-200 ease-in-out inline-block"
-                >
-                  Profile
-                </a>
-              </li>
-            </ul>
-          </div>
+          <div className="grid gap-6 sm:grid-cols-2">
+            <div className="space-y-4 rounded-3xl border border-white/70 bg-white/60 p-6 backdrop-blur dark:border-gray-800 dark:bg-[#111827]">
+              <h3 className="text-xs font-semibold uppercase tracking-[0.3em] text-gray-900 dark:text-white">
+                Explore
+              </h3>
+              <ul className="space-y-3 text-sm">
+                <li>
+                  <a
+                    href="/problems"
+                    className="block text-gray-600 transition-colors duration-200 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
+                  >
+                    Browse problem sets
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/leaderboard"
+                    className="block text-gray-600 transition-colors duration-200 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
+                  >
+                    See rankings
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/discuss"
+                    className="block text-gray-600 transition-colors duration-200 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
+                  >
+                    Read community insights
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/profile"
+                    className="block text-gray-600 transition-colors duration-200 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
+                  >
+                    Manage your profile
+                  </a>
+                </li>
+              </ul>
+            </div>
 
-          {/* Resources */}
-          <div className="space-y-5 text-center md:text-left">
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-white tracking-wide uppercase letter-spacing-1 transition-all duration-200 ease-in-out">
-              Resources
-            </h3>
-            <ul className="space-y-3">
-              <li>
+            <div className="space-y-4 rounded-3xl border border-white/70 bg-white/60 p-6 backdrop-blur dark:border-gray-800 dark:bg-[#111827]">
+              <h3 className="text-xs font-semibold uppercase tracking-[0.3em] text-gray-900 dark:text-white">
+                Connect
+              </h3>
+              <p className="text-sm leading-6 text-gray-600 dark:text-gray-400">
+                Stay close to updates, releases, and community activity.
+              </p>
+              <div className="flex gap-5 pt-1">
                 <a
-                  href="#about"
-                  className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:translate-x-1 transition-all duration-200 ease-in-out inline-block"
+                  href="https://github.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-600 transition-transform duration-200 hover:-translate-y-0.5 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
+                  aria-label="GitHub"
                 >
-                  About
+                  <FaGithub size={22} />
                 </a>
-              </li>
-              <li>
                 <a
-                  href="#help"
-                  className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:translate-x-1 transition-all duration-200 ease-in-out inline-block"
+                  href="https://linkedin.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-600 transition-transform duration-200 hover:-translate-y-0.5 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
+                  aria-label="LinkedIn"
                 >
-                  Help
+                  <FaLinkedin size={22} />
                 </a>
-              </li>
-              <li>
                 <a
-                  href="#privacy"
-                  className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:translate-x-1 transition-all duration-200 ease-in-out inline-block"
+                  href="https://twitter.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-600 transition-transform duration-200 hover:-translate-y-0.5 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
+                  aria-label="Twitter"
                 >
-                  Privacy Policy
+                  <FaXTwitter size={22} />
                 </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Social Links */}
-          <div className="space-y-5 text-center md:text-left">
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-white tracking-wide uppercase letter-spacing-1 transition-all duration-200 ease-in-out">
-              Follow Us
-            </h3>
-            <div className="flex gap-6 justify-center md:justify-start">
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-600 dark:text-gray-400 hover:text-blue-400 dark:hover:text-blue-400 hover:scale-110 transition-all duration-200 ease-in-out"
-                aria-label="GitHub"
-              >
-                <FaGithub size={22} />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-600 dark:text-gray-400 hover:text-blue-400 dark:hover:text-blue-400 hover:scale-110 transition-all duration-200 ease-in-out"
-                aria-label="LinkedIn"
-              >
-                <FaLinkedin size={22} />
-              </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-600 dark:text-gray-400 hover:text-blue-400 dark:hover:text-blue-400 hover:scale-110 transition-all duration-200 ease-in-out"
-                aria-label="Twitter"
-              >
-                <FaXTwitter size={22} />
-              </a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Divider with subtle glow */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 mt-10">
-        <div className="flex justify-center mb-6">
-          <p className="text-xs text-gray-500 dark:text-gray-400 transition-all duration-200 ease-in-out">
-            Built with ❤️ for coders
+        <div className="mt-8 flex flex-col gap-4 border-t border-gray-200/80 pt-6 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left dark:border-gray-800">
+          <p className="text-xs text-gray-500 dark:text-gray-400">
+            Built for coders who want a fast, clear practice loop.
+          </p>
+          <p className="text-sm text-gray-500 dark:text-gray-500">
+            © {currentYear} Coding Platform. All rights reserved.
           </p>
         </div>
-        <div className="border-t border-gray-300 dark:border-gray-800 transition-all duration-200 ease-in-out"></div>
-      </div>
-
-      {/* Copyright Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 pt-6">
-        <p className="text-center text-sm text-gray-500 dark:text-gray-500 transition-all duration-200 ease-in-out">
-          © {currentYear} Coding Platform. All rights reserved.
-        </p>
       </div>
     </footer>
   );
