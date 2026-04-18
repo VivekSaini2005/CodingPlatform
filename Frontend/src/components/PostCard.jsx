@@ -125,14 +125,14 @@ const PostCard = ({ post, refreshPosts }) => {
   const avatarUrl = post.profileImage || post.author?.avatar || `https://ui-avatars.com/api/?name=${authorName}&background=ff6b00&color=fff`;
 
   return (
-    <div className="bg-white dark:bg-[#1e2332] border border-gray-200 dark:border-[#2d3348] rounded-xl p-6 transition-all hover:border-gray-300 dark:hover:border-gray-500">
+    <div className="bg-white dark:bg-[#262626] border border-gray-200 dark:border-[#2f2f2f] rounded-xl p-6 transition-all hover:border-gray-300 dark:hover:border-gray-500">
       <div className="flex gap-4">
         {/* Avatar */}
         <div className="flex-shrink-0">
           <img
             src={avatarUrl}
             alt={authorName}
-            className="w-12 h-12 rounded-full border-2 border-gray-200 dark:border-[#2d3348]"
+            className="w-12 h-12 rounded-full border-2 border-gray-200 dark:border-[#2f2f2f]"
           />
         </div>
 
@@ -220,7 +220,7 @@ const PostCard = ({ post, refreshPosts }) => {
 
           {/* Comments Section */}
           {showComments && (
-            <div className="border-t border-gray-200 dark:border-gray-700 p-4">
+            <div className="border-t border-gray-200 dark:border-[#2f2f2f] p-4">
               <CommentSection postId={post._id} authorId={post.author._id || post.author} />
             </div>
           )}

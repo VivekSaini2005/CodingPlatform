@@ -26,7 +26,7 @@ export default function LeaderboardTrendChart() {
                 <span className="rounded-md bg-green-500/10 px-2 py-1 text-xs text-green-600 dark:text-green-400">↑ Improving</span>
             </div>
 
-            <div className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white/60 p-5 shadow-lg backdrop-blur-xl transition duration-300 hover:shadow-xl dark:border-white/10 dark:bg-white/5 animate-[float_6s_ease-in-out_infinite]">
+            <div className="relative overflow-hidden rounded-xl border border-gray-200 dark:border-[#2f2f2f] bg-white dark:bg-[#262626] p-5 transition-colors duration-200 hover:border-[#3a3a3a]">
                 <div className="relative z-10 h-64 w-full">
                     <ResponsiveContainer width="100%" height="100%">
                         <AreaChart data={trendData} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
@@ -70,7 +70,7 @@ export default function LeaderboardTrendChart() {
                                 type="monotone"
                                 dataKey="rank"
                                 stroke="#6366f1"
-                                fill="url(#rankGradient)"
+                                fill="rgba(99, 102, 241, 0.18)"
                                 strokeWidth={3}
                                 dot={false}
                                 activeDot={{
@@ -79,7 +79,6 @@ export default function LeaderboardTrendChart() {
                                     strokeWidth: 2,
                                     fill: "#fff",
                                 }}
-                                filter="drop-shadow(0 0 6px rgba(99,102,241,0.5))"
                                 isAnimationActive={true}
                                 animationDuration={1500}
                             />
@@ -88,7 +87,7 @@ export default function LeaderboardTrendChart() {
                                 type="monotone"
                                 dataKey="avg"
                                 stroke="#22c55e"
-                                fill="url(#avgGradient)"
+                                fill="rgba(34, 197, 94, 0.12)"
                                 strokeWidth={3}
                                 dot={false}
                                 activeDot={false}

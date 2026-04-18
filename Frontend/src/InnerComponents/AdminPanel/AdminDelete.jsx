@@ -47,7 +47,7 @@ const AdminDelete = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="flex justify-center items-center h-screen bg-gray-50 dark:bg-[#1a1a1a]">
         <span className="loading loading-spinner loading-lg text-gray-900 dark:text-white"></span>
       </div>
     );
@@ -55,7 +55,7 @@ const AdminDelete = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-red-600 dark:text-red-400 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-[#1a1a1a] text-red-600 dark:text-red-400 flex items-center justify-center">
         {error}
       </div>
     );
@@ -63,7 +63,7 @@ const AdminDelete = () => {
 
   return (
 
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 py-10 px-6">
+    <div className="min-h-screen bg-gray-50 dark:bg-[#1a1a1a] text-gray-900 dark:text-gray-100 py-10 px-6">
 
       <div className="max-w-6xl mx-auto">
 
@@ -71,7 +71,7 @@ const AdminDelete = () => {
           Delete Problems
         </h1>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
+        <div className="bg-white dark:bg-[#262626] rounded-xl border border-gray-200 dark:border-[#2f2f2f] overflow-hidden">
 
           <table className="w-full">
 
@@ -91,7 +91,7 @@ const AdminDelete = () => {
 
                 <tr
                   key={problem._id}
-                  className="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition duration-200 text-gray-800 dark:text-gray-200"
+                  className="border-b border-gray-200 dark:border-[#2f2f2f] hover:bg-gray-50 dark:hover:bg-gray-700 transition duration-200 text-gray-800 dark:text-gray-200"
                 >
 
                   <td className="p-4">

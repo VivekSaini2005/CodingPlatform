@@ -99,17 +99,17 @@ const ProblemList = () => {
 
     const getDifficultyColor = (difficulty) => {
         switch (difficulty.toLowerCase()) {
-            case 'easy': return 'text-green-600 bg-green-50 dark:bg-green-500/10 border border-green-100 dark:border-green-500/20';
-            case 'medium': return 'text-yellow-500 bg-yellow-50 dark:bg-yellow-500/10 border border-yellow-100 dark:border-yellow-500/20';
-            case 'hard': return 'text-red-500 bg-red-50 dark:bg-red-500/10 border border-red-100 dark:border-red-500/20';
-            default: return 'text-gray-500 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700';
+            case 'easy': return 'text-green-500 bg-gray-100 dark:bg-[#2f2f2f] rounded-full px-3 py-1';
+            case 'medium': return 'text-yellow-500 bg-gray-100 dark:bg-[#2f2f2f] rounded-full px-3 py-1';
+            case 'hard': return 'text-red-500 bg-gray-100 dark:bg-[#2f2f2f] rounded-full px-3 py-1';
+            default: return 'text-black dark:text-white bg-gray-100 dark:bg-[#2f2f2f] rounded-full px-3 py-1';
         }
     };
 
     if (loading) {
         return (
             <div className="flex justify-center items-center min-h-[60vh]">
-                <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
+                <Loader2 className="h-8 w-8 animate-spin text-yellow-500" />
             </div>
         );
     }
@@ -123,7 +123,7 @@ const ProblemList = () => {
     }
 
     return (
-        <div className="w-full min-h-screen page-fade-in bg-white dark:bg-gray-900 pb-12">
+        <div className="w-full min-h-screen page-fade-in bg-white dark:bg-[#1a1a1a] text-black dark:text-white pb-12 transition-colors duration-200">
             <div className="relative">
                 <section
                     className="relative w-full h-[100vh] md:h-[100vh] lg:h-[100vh] pb-10 md:pb-12 bg-cover bg-center bg-no-repeat brightness-110 contrast-110"
@@ -131,20 +131,20 @@ const ProblemList = () => {
                         backgroundImage: `url(${baseimage})`
                     }}
                 >
+                    <div className="absolute inset-0 bg-black/20 dark:bg-black/60" />
                     {/* <div className="absolute inset-0 bg-black/30 dark:bg-transparent"></div> */}
-                    {/* <div className="absolute inset-0 bg-gradient-to-r from-white/70 via-white/40 to-transparent dark:from-black/70 dark:via-black/40"></div> */}
-                    <div className="absolute bottom-0 left-0 w-full h-14 md:h-16 bg-gradient-to-t from-white via-white/40 to-transparent dark:from-gray-900 dark:via-gray-900/60 dark:to-transparent z-[5]" />
+                    <div className="absolute bottom-0 left-0 w-full h-14 md:h-16 bg-black/25 z-[5]" />
                     <div className="absolute z-10 flex flex-col justify-center h-full px-8 md:px-16 hero-content-fade-in">
                         <div className="max-w-2xl">
-                            <h2 className="text-4xl md:text-5xl font-bold text-white dark:text-white drop-shadow-lg">
+                            <h2 className="text-4xl md:text-5xl font-bold text-white dark:text-white">
                                 Solve FAANG-Level Problems
                             </h2>
-                            <p className="text-white dark:text-gray-300 mt-3 text-lg drop-shadow-lg">
+                            <p className="text-white dark:text-gray-300 mt-3 text-lg">
                                 Practice real interview questions from top tech companies
                             </p>
                             <a
                                 href="#problems-section"
-                                className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg mt-4 transition-all duration-200 hover:scale-105"
+                                className="inline-block bg-[#2f2f2f] hover:bg-[#3a3a3a] text-white px-6 py-3 rounded-lg mt-4 transition-all duration-200 hover:scale-105"
                             >
                                 Start Solving
                             </a>
@@ -155,8 +155,7 @@ const ProblemList = () => {
                 <div className="max-w-7xl mx-auto px-6 mt-12 space-y-6">
 
                 <div id="problems-section" className="relative z-20 max-w-6xl mx-auto mt-[-84px] md:mt-[-110px]">
-                    <div className="p-[1px] rounded-xl bg-gradient-to-r from-blue-500/30 via-purple-500/20 to-transparent transition hover:-translate-y-1 ">
-                        <div className="rounded-xl bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border border-gray-200 dark:border-gray-800 shadow-lg px-6 py-6 md:px-10">
+                    <div className="rounded-xl border border-gray-200 bg-white px-6 py-6 md:px-10 dark:border-[#2f2f2f] dark:bg-[#262626]">
                             <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-6 md:gap-8 justify-items-center items-center">
                                 {companies.map((company) => (
                                     <div
@@ -164,7 +163,7 @@ const ProblemList = () => {
                                         data-company-item
                                         className="flex justify-center items-center opacity-90 hover:opacity-100 hover:scale-105 transition duration-200"
                                     >
-                                        <div className="w-[90px] flex justify-center px-3 py-2 rounded-md bg-white/80 dark:bg-white/90 backdrop-blur-sm border border-gray-200/70 dark:border-gray-700/60 shadow-sm">
+                                        <div className="w-[90px] flex justify-center px-3 py-2 rounded-md bg-white/80 dark:bg-white/90 border border-gray-200/70 dark:border-[#2f2f2f]/60">
                                             <img
                                                 src={company.logo}
                                                 alt={`${company.name} logo`}
@@ -180,13 +179,12 @@ const ProblemList = () => {
                                 ))}
                             </div>
                         </div>
-                    </div>
                 </div>
 
                 <div>
 
                 {/* Header */}
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                <h1 className="mb-4 text-3xl font-bold text-gray-900 dark:text-gray-100">
                     Problems
                 </h1>
 
@@ -200,10 +198,10 @@ const ProblemList = () => {
                                 key={tag}
                                 type="button"
                                 onClick={() => setSelectedTag(tag)}
-                                className={`px-3 py-1 rounded-full text-sm bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer transition shadow-sm ${isActive ? 'bg-gray-200 dark:bg-gray-700 shadow-sm' : ''}`}
+                                className={`cursor-pointer rounded-full bg-gray-100 dark:bg-[#2f2f2f] px-3 py-1 text-sm text-black dark:text-white transition-all duration-200 hover:bg-gray-200 dark:hover:bg-[#3a3a3a] ${isActive ? 'text-yellow-500' : ''}`}
                             >
                                 {tag}
-                                <span className="ml-1 text-xs px-2 py-[2px] rounded-full bg-gray-200 dark:bg-gray-700">
+                                <span className="ml-1 rounded-full bg-gray-200 px-2 py-[2px] text-xs text-gray-600 dark:bg-[#262626] dark:text-gray-400">
                                     {count}
                                 </span>
                             </button>
@@ -220,7 +218,7 @@ const ProblemList = () => {
                                 key={label}
                                 type="button"
                                 onClick={() => setDifficultyOrder(value)}
-                                className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer transition shadow-sm ${isActive ? 'bg-white dark:bg-gray-700 shadow-md' : ''}`}
+                                className={`flex cursor-pointer items-center gap-2 rounded-full bg-gray-100 dark:bg-[#2f2f2f] px-3 py-1 text-sm font-medium text-black dark:text-white transition-all duration-200 hover:bg-gray-200 dark:hover:bg-[#3a3a3a] ${isActive ? 'text-yellow-500' : ''}`}
                             >
                                 <Icon className="w-4 h-4" />
                                 {label}
@@ -230,29 +228,29 @@ const ProblemList = () => {
                 </div>
 
                 <div className="flex items-center justify-between mt-6 gap-4 flex-col lg:flex-row">
-                    <div className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded-full w-full max-w-md shadow-sm">
+                    <div className="flex items-center gap-2 w-full max-w-md">
                         <Search className="h-4 w-4 text-gray-500 dark:text-gray-400" />
                         <input
                             type="text"
-                            className="w-full bg-transparent outline-none text-sm text-gray-700 dark:text-gray-300 placeholder-gray-500 dark:placeholder-gray-400"
+                            className="w-full rounded-full border border-gray-300 bg-white px-4 py-2 text-sm text-gray-800 placeholder-gray-500 focus:border-yellow-500 focus:outline-none dark:border-[#2f2f2f] dark:bg-[#2a2a2a] dark:text-gray-200 dark:placeholder-gray-500"
                             placeholder="Search problems..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
                     </div>
 
-                    <div className="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">
+                    <div className="flex items-center gap-3 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">
                         <span>{user?.problemSolved?.length || 0}/{problems.length} Solved</span>
                         <button
                             type="button"
-                            className="inline-flex items-center justify-center h-9 w-9 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition shadow-sm"
+                            className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 dark:bg-[#2f2f2f] text-black dark:text-white transition-all duration-200 hover:bg-gray-200 dark:hover:bg-[#3a3a3a]"
                             aria-label="Filter"
                         >
                             <Tag className="h-4 w-4" />
                         </button>
                         <button
                             type="button"
-                            className="inline-flex items-center justify-center h-9 w-9 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition shadow-sm"
+                            className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 dark:bg-[#2f2f2f] text-black dark:text-white transition-all duration-200 hover:bg-gray-200 dark:hover:bg-[#3a3a3a]"
                             aria-label="Sort"
                         >
                             <ArrowUp className="h-4 w-4" />
@@ -260,13 +258,12 @@ const ProblemList = () => {
                     </div>
                 </div>
 
-                <div className="mt-6 rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden bg-white dark:bg-gray-900 shadow-sm">
-                    <div className="divide-y divide-gray-100 dark:divide-gray-800 pb-0">
+                <div className="mt-6 space-y-2 pb-0">
 
                     {filteredProblems.map((problem) => (
                         <div
                             key={problem._id}
-                            className="flex items-center justify-between gap-6 px-6 py-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+                            className="flex items-center justify-between gap-6 rounded-lg border border-gray-200 bg-white px-4 py-3 transition-all duration-200 hover:bg-gray-50 dark:border-[#2f2f2f] dark:bg-[#262626] dark:hover:bg-[#2f2f2f]"
                         >
                             <div className="flex items-center gap-3 min-w-0 flex-1 text-left">
                                 {user?.problemSolved?.some(
@@ -279,7 +276,7 @@ const ProblemList = () => {
 
                                 <Link
                                     to={`/problems/${problem._id}`}
-                                    className="block min-w-0 text-sm font-medium text-left text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-300 truncate transition-colors duration-200"
+                                    className="block min-w-0 truncate text-left text-sm font-medium text-gray-900 transition-colors duration-200 hover:text-yellow-500 dark:text-gray-200"
                                 >
                                     {problem.title}
                                 </Link>
@@ -288,7 +285,7 @@ const ProblemList = () => {
                             <div className="flex items-center justify-end shrink-0">
                                 <Link
                                     to={`/problems/${problem._id}`}
-                                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-xs font-medium transition-all duration-200 hover:scale-105"
+                                    className="rounded-lg bg-gray-900 px-4 py-2 text-xs font-medium text-white transition-all duration-200 hover:scale-105 hover:bg-gray-700 dark:bg-[#2f2f2f] dark:hover:bg-[#3a3a3a]"
                                 >
                                     Solve
                                 </Link>
@@ -296,7 +293,7 @@ const ProblemList = () => {
 
                             <div className="flex items-center justify-end w-32 shrink-0">
                                 <span
-                                    className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${getDifficultyColor(problem.difficulty)}`}
+                                    className={`inline-flex items-center text-xs font-semibold ${getDifficultyColor(problem.difficulty)}`}
                                 >
                                     {problem.difficulty}
                                 </span>
@@ -305,12 +302,10 @@ const ProblemList = () => {
                     ))}
 
                     {filteredProblems.length === 0 && (
-                        <div className="text-center py-12 text-gray-600 dark:text-gray-400">
+                        <div className="rounded-lg border border-gray-200 bg-white px-4 py-12 text-center text-gray-600 dark:border-[#2f2f2f] dark:bg-[#262626] dark:text-gray-400">
                             No problems found matching your search.
                         </div>
                     )}
-
-                    </div>
                 </div>
 
                 </div>

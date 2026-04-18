@@ -39,7 +39,7 @@ const HeatMap = ({ submissions }) => {
     }
 
     return (
-        <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+        <div className="bg-white dark:bg-[#262626] rounded-xl p-6 border border-gray-200 dark:border-[#2f2f2f]">
             <div className="flex justify-between items-center mb-6">
                 <h2 className="text-xl font-bold text-gray-900 dark:text-white">Activity Heatmap</h2>
                 <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">

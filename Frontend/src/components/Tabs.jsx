@@ -1,17 +1,15 @@
-import { useState } from 'react';
-
 const Tabs = ({ tabs, activeTab, onTabChange }) => {
     return (
-        <div className="flex border-b border-gray-200 dark:border-gray-700">
+        <div className="flex border-b border-[#2a2a2a] bg-white dark:bg-[#262626]">
             {tabs.map((tab) => (
                 <button
                     key={tab.id}
                     onClick={() => onTabChange(tab.id)}
                     className={`
-                        px-4 py-2 text-sm font-medium focus:outline-none transition-colors
+                        px-4 py-2 text-sm font-medium focus:outline-none transition-colors border-b-2
                         ${activeTab === tab.id
-                            ? 'text-blue-600 border-b-2 border-blue-600 dark:text-blue-400 dark:border-blue-400'
-                            : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
+                            ? 'text-white border-yellow-500'
+                            : 'text-gray-400 border-transparent hover:text-white'
                         }
                     `}
                 >

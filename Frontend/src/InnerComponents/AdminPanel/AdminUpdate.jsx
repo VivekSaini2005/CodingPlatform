@@ -132,7 +132,7 @@ const AdminUpdate = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="flex justify-center items-center h-screen bg-gray-50 dark:bg-[#1a1a1a]">
         <span className="loading loading-spinner loading-lg text-gray-900 dark:text-white"></span>
       </div>
     );
@@ -144,7 +144,7 @@ const AdminUpdate = () => {
 
   return (
 
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 py-10 px-6">
+    <div className="min-h-screen bg-gray-50 dark:bg-[#1a1a1a] text-gray-900 dark:text-gray-100 py-10 px-6">
 
       <div className="max-w-6xl mx-auto">
 
@@ -155,7 +155,7 @@ const AdminUpdate = () => {
               Admin Problem Manager
             </h1>
 
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
+            <div className="bg-white dark:bg-[#262626] rounded-xl border border-gray-200 dark:border-[#2f2f2f] overflow-hidden">
 
               <table className="w-full">
 
@@ -174,7 +174,7 @@ const AdminUpdate = () => {
 
                     <tr
                       key={problem._id}
-                      className="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200"
+                      className="border-b border-gray-200 dark:border-[#2f2f2f] hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200"
                     >
 
                       <td className="p-4">{index + 1}</td>
@@ -227,7 +227,7 @@ const AdminUpdate = () => {
 
         ) : (
 
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-8 space-y-6 border border-gray-200 dark:border-gray-700">
+          <div className="bg-white dark:bg-[#262626] rounded-xl p-8 space-y-6 border border-gray-200 dark:border-[#2f2f2f]">
 
             <h2 className="text-2xl font-bold">
               Update Problem
@@ -243,7 +243,7 @@ const AdminUpdate = () => {
                 name="title"
                 value={selectedProblem.title || ""}
                 onChange={handleChange}
-                className="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-md p-3 text-gray-900 dark:text-gray-100"
+                className="w-full bg-gray-100 dark:bg-[#2a2a2a] border border-gray-300 dark:border-[#2f2f2f] rounded-md p-3 text-gray-800 dark:text-gray-200 placeholder-gray-500 focus:outline-none focus:border-yellow-500"
               />
             </div>
 
@@ -258,7 +258,7 @@ const AdminUpdate = () => {
                 value={selectedProblem.description || ""}
                 onChange={handleChange}
                 rows={4}
-                className="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-md p-3 text-gray-900 dark:text-gray-100"
+                className="w-full bg-gray-100 dark:bg-[#2a2a2a] border border-gray-300 dark:border-[#2f2f2f] rounded-md p-3 text-gray-800 dark:text-gray-200 placeholder-gray-500 focus:outline-none focus:border-yellow-500"
               />
             </div>
 
@@ -272,7 +272,7 @@ const AdminUpdate = () => {
                 name="difficulty"
                 value={selectedProblem.difficulty || "easy"}
                 onChange={handleChange}
-                className="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-md p-3 text-gray-900 dark:text-gray-100"
+                className="w-full bg-gray-100 dark:bg-[#2a2a2a] border border-gray-300 dark:border-[#2f2f2f] rounded-md p-3 text-gray-800 dark:text-gray-200 placeholder-gray-500 focus:outline-none focus:border-yellow-500"
               >
 
                 <option value="easy">easy</option>
@@ -291,7 +291,7 @@ const AdminUpdate = () => {
 
               {selectedProblem.explainTestCase.map((test, i) => (
 
-                <div key={i} className="bg-gray-100 dark:bg-gray-900 p-4 rounded mb-4 space-y-2 border border-gray-200 dark:border-gray-700">
+                <div key={i} className="bg-gray-100 dark:bg-[#1a1a1a] p-4 rounded mb-4 space-y-2 border border-gray-200 dark:border-[#2f2f2f]">
 
                   <div className="flex gap-3">
 
@@ -301,7 +301,7 @@ const AdminUpdate = () => {
                       onChange={(e) =>
                         handleArrayChange("explainTestCase", i, "input", e.target.value)
                       }
-                      className="flex-1 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 p-2 rounded text-gray-900 dark:text-gray-100"
+                      className="flex-1 bg-gray-100 dark:bg-[#2a2a2a] border border-gray-300 dark:border-[#2f2f2f] p-2 rounded text-gray-800 dark:text-gray-200 placeholder-gray-500 focus:outline-none focus:border-yellow-500"
                     />
 
                     <input
@@ -310,7 +310,7 @@ const AdminUpdate = () => {
                       onChange={(e) =>
                         handleArrayChange("explainTestCase", i, "output", e.target.value)
                       }
-                      className="flex-1 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 p-2 rounded text-gray-900 dark:text-gray-100"
+                      className="flex-1 bg-gray-100 dark:bg-[#2a2a2a] border border-gray-300 dark:border-[#2f2f2f] p-2 rounded text-gray-800 dark:text-gray-200 placeholder-gray-500 focus:outline-none focus:border-yellow-500"
                     />
 
                     <button
@@ -329,7 +329,7 @@ const AdminUpdate = () => {
                       handleArrayChange("explainTestCase", i, "explanation", e.target.value)
                     }
                     rows={2}
-                    className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 p-2 rounded text-gray-900 dark:text-gray-100"
+                    className="w-full bg-gray-100 dark:bg-[#2a2a2a] border border-gray-300 dark:border-[#2f2f2f] p-2 rounded text-gray-800 dark:text-gray-200 placeholder-gray-500 focus:outline-none focus:border-yellow-500"
                   />
 
                 </div>
@@ -359,7 +359,7 @@ const AdminUpdate = () => {
 
               {selectedProblem.visibleTestCases.map((test, i) => (
 
-                <div key={i} className="bg-gray-100 dark:bg-gray-900 p-4 rounded mb-4 space-y-2 border border-gray-200 dark:border-gray-700">
+                <div key={i} className="bg-gray-100 dark:bg-[#1a1a1a] p-4 rounded mb-4 space-y-2 border border-gray-200 dark:border-[#2f2f2f]">
 
                   <div className="flex gap-3">
 
@@ -369,7 +369,7 @@ const AdminUpdate = () => {
                       onChange={(e) =>
                         handleArrayChange("visibleTestCases", i, "input", e.target.value)
                       }
-                      className="flex-1 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 p-2 rounded text-gray-900 dark:text-gray-100"
+                      className="flex-1 bg-gray-100 dark:bg-[#2a2a2a] border border-gray-300 dark:border-[#2f2f2f] p-2 rounded text-gray-800 dark:text-gray-200 placeholder-gray-500 focus:outline-none focus:border-yellow-500"
                     />
 
                     <input
@@ -378,7 +378,7 @@ const AdminUpdate = () => {
                       onChange={(e) =>
                         handleArrayChange("visibleTestCases", i, "output", e.target.value)
                       }
-                      className="flex-1 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 p-2 rounded text-gray-900 dark:text-gray-100"
+                      className="flex-1 bg-gray-100 dark:bg-[#2a2a2a] border border-gray-300 dark:border-[#2f2f2f] p-2 rounded text-gray-800 dark:text-gray-200 placeholder-gray-500 focus:outline-none focus:border-yellow-500"
                     />
 
                     <button
@@ -397,7 +397,7 @@ const AdminUpdate = () => {
                       handleArrayChange("visibleTestCases", i, "explanation", e.target.value)
                     }
                     rows={2}
-                    className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 p-2 rounded text-gray-900 dark:text-gray-100"
+                    className="w-full bg-gray-100 dark:bg-[#2a2a2a] border border-gray-300 dark:border-[#2f2f2f] p-2 rounded text-gray-800 dark:text-gray-200 placeholder-gray-500 focus:outline-none focus:border-yellow-500"
                   />
 
                 </div>
@@ -436,7 +436,7 @@ const AdminUpdate = () => {
                     onChange={(e) =>
                       handleArrayChange("hiddenTestCases", i, "input", e.target.value)
                     }
-                    className="flex-1 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 p-2 rounded text-gray-900 dark:text-gray-100"
+                    className="flex-1 bg-gray-100 dark:bg-[#2a2a2a] border border-gray-300 dark:border-[#2f2f2f] p-2 rounded text-gray-800 dark:text-gray-200 placeholder-gray-500 focus:outline-none focus:border-yellow-500"
                   />
 
                   <input
@@ -445,7 +445,7 @@ const AdminUpdate = () => {
                     onChange={(e) =>
                       handleArrayChange("hiddenTestCases", i, "output", e.target.value)
                     }
-                    className="flex-1 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 p-2 rounded text-gray-900 dark:text-gray-100"
+                    className="flex-1 bg-gray-100 dark:bg-[#2a2a2a] border border-gray-300 dark:border-[#2f2f2f] p-2 rounded text-gray-800 dark:text-gray-200 placeholder-gray-500 focus:outline-none focus:border-yellow-500"
                   />
 
                   <button

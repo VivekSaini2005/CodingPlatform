@@ -6,7 +6,7 @@ const socketHandler = (io) => {
 
   io.on("connection", (socket) => {
 
-    console.log("User Connected:", socket.id);
+    // console.log("User Connected:", socket.id);
 
 
     /*
@@ -198,7 +198,7 @@ const socketHandler = (io) => {
     */
 
     socket.on("disconnect", () => {
-      console.log("User Disconnected");
+      // console.log("User Disconnected");
     });
 
   });

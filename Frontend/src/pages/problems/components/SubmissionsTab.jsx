@@ -61,7 +61,7 @@ const SubmissionsTab = ({ problemId }) => {
             <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
                     <thead>
-                        <tr className="border-b border-gray-200 dark:border-gray-700">
+                        <tr className="border-b border-gray-200 dark:border-[#2f2f2f]">
                             <th className="py-3 px-4 text-sm font-semibold text-gray-600 dark:text-gray-400">Status</th>
                             <th className="py-3 px-4 text-sm font-semibold text-gray-600 dark:text-gray-400">Language</th>
                             <th className="py-3 px-4 text-sm font-semibold text-gray-600 dark:text-gray-400">Time</th>
@@ -71,7 +71,7 @@ const SubmissionsTab = ({ problemId }) => {
                     </thead>
                     <tbody>
                         {[...submissions].reverse().map((sub) => (
-                            <tr key={sub._id} className="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors">
+                            <tr key={sub._id} className="border-b border-gray-200 dark:border-[#2f2f2f] hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors">
                                 <td className="py-4 px-4">
                                     <div className="flex items-center space-x-2">
                                         {sub.status === 'accepted' ? (

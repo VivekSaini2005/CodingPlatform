@@ -125,7 +125,7 @@ const ProblemDetail = () => {
 
     if (loading) {
         return (
-            <div className="flex justify-center items-center min-h-screen">
+            <div className="flex justify-center items-center min-h-screen bg-white dark:bg-[#1a1a1a] text-black dark:text-white">
                 <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
             </div>
         );
@@ -154,7 +154,7 @@ const ProblemDetail = () => {
                 <PanelGroup orientation="horizontal">
                     {/* Left Side: Description,Submissions, ChatAi, and Editorial */}
                     <Panel defaultSize={50} minSize={20}>
-                        <div className="h-full flex flex-col border-r border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 overflow-hidden">
+                        <div className="h-full flex flex-col border-r border-gray-300 dark:border-[#2f2f2f] bg-white dark:bg-[#1a1a1a] overflow-hidden">
                             <Tabs
                                 tabs={[
                                     { id: 'description', label: 'Description' },
@@ -177,7 +177,7 @@ const ProblemDetail = () => {
                         </div>
                     </Panel>
 
-                    <PanelResizeHandle className="w-1.5 bg-gray-100 dark:bg-gray-900 border-x border-gray-300 dark:border-gray-700 hover:bg-blue-500/20 transition-colors flex items-center justify-center group cursor-col-resize">
+                    <PanelResizeHandle className="w-1.5 bg-gray-100 dark:bg-[#1a1a1a] border-x border-gray-300 dark:border-[#2f2f2f] hover:bg-blue-500/20 transition-colors flex items-center justify-center group cursor-col-resize">
                         <div className="w-0.5 h-8 bg-gray-400 dark:bg-gray-700 group-hover:bg-blue-500 rounded-full"></div>
                     </PanelResizeHandle>
 
@@ -192,7 +192,7 @@ const ProblemDetail = () => {
                                 />
                             </Panel>
 
-                            <PanelResizeHandle className="h-1.5 bg-gray-100 dark:bg-gray-900 border-y border-gray-300 dark:border-gray-700 hover:bg-blue-500/20 transition-colors flex items-center justify-center group cursor-row-resize">
+                            <PanelResizeHandle className="h-1.5 bg-gray-100 dark:bg-[#1a1a1a] border-y border-gray-300 dark:border-[#2f2f2f] hover:bg-blue-500/20 transition-colors flex items-center justify-center group cursor-row-resize">
                                 <div className="w-8 h-0.5 bg-gray-400 dark:bg-gray-700 group-hover:bg-blue-500 rounded-full"></div>
                             </PanelResizeHandle>
 

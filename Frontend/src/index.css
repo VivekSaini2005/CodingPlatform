@@ -49,3 +49,9 @@
 .hero-content-fade-in {
 	animation: hero-content-fade-in 520ms ease-out;
 }
+
+html,
+body,
+#root {
+	min-height: 100%;
+}

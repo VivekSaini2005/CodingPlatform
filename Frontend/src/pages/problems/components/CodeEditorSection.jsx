@@ -3,11 +3,7 @@ import { useTheme } from '../../../context/themeContext';
 
 const CodeEditorSection = ({ language, code, setCode }) => {
     const { theme } = useTheme();
-
-    // Determine active theme
-    const isDarkMode =
-        theme === 'dark' ||
-        (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    const isDarkMode = theme === 'dark';
 
     const handleEditorWillMount = (monaco) => {
         // Define Dark Theme
@@ -40,7 +36,7 @@ const CodeEditorSection = ({ language, code, setCode }) => {
     };
 
     return (
-        <div className="h-full flex flex-col bg-white dark:bg-slate-900 overflow-hidden">
+        <div className="h-full flex flex-col bg-white dark:bg-[#262626] border border-gray-200 dark:border-[#2f2f2f] overflow-hidden">
             <div className="flex-1">
                 <Editor
                     height="100%"

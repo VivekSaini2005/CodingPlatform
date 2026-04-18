@@ -53,7 +53,7 @@ const CommentItem = ({ comment, allComments, postId, authorId, depth = 0 }) => {
     : "";
 
   return (
-    <div className={`mt-4 ${depth > 0 ? 'ml-2 pl-4 border-l-2 border-gray-200 dark:border-[#2d3348]' : ''}`}>
+    <div className={`mt-4 ${depth > 0 ? 'ml-2 pl-4 border-l-2 border-gray-200 dark:border-[#2f2f2f]' : ''}`}>
       <div className="flex gap-3">
         {/* Avatar */}
         <div className="flex-shrink-0 mt-1">
@@ -101,7 +101,7 @@ const CommentItem = ({ comment, allComments, postId, authorId, depth = 0 }) => {
               </div>
               <div className="flex-1 relative">
                 <input
-                  className="w-full bg-gray-50 dark:bg-[#151822] text-gray-900 dark:text-white rounded-lg py-2 px-3 pr-10 border border-gray-200 dark:border-[#2d3348] focus:border-[#ff6b00] dark:focus:border-[#ff6b00] outline-none text-sm transition-colors"
+                  className="w-full bg-gray-100 dark:bg-[#2a2a2a] text-gray-800 dark:text-gray-200 rounded-lg py-2 px-3 pr-10 border border-gray-300 dark:border-[#2f2f2f] placeholder-gray-500 focus:outline-none focus:border-yellow-500 text-sm transition-colors"
                   placeholder={`Replying to ${authorName}...`}
                   value={replyText}
                   onChange={(e) => setReplyText(e.target.value)}

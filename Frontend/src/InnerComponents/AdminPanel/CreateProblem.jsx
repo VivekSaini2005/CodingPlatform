@@ -114,7 +114,7 @@ function CreateProblem() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 p-10">
+    <div className="min-h-screen bg-gray-50 dark:bg-[#1a1a1a] text-gray-900 dark:text-gray-100 p-10">
       <div className="max-w-6xl mx-auto space-y-8">
 
         <h1 className="text-4xl font-bold text-center text-cyan-700 dark:text-cyan-400 tracking-wide">
@@ -130,7 +130,7 @@ function CreateProblem() {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
 
           {/* ---------------- Basic Info ---------------- */}
-          <div className="bg-white dark:bg-gray-800/60 backdrop-blur-lg p-6 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 space-y-4">
+          <div className="bg-white dark:bg-[#262626] p-6 rounded-xl border border-gray-200 dark:border-[#2f2f2f] space-y-4">
             <h2 className="text-xl font-semibold text-cyan-700 dark:text-cyan-300">
               Basic Information
             </h2>
@@ -138,20 +138,20 @@ function CreateProblem() {
             <input
               {...register('title')}
               placeholder="Problem Title"
-              className="w-full p-3 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-300 dark:border-gray-700 focus:border-cyan-500 dark:focus:border-cyan-400 outline-none"
+              className="w-full p-3 bg-gray-100 dark:bg-[#2a2a2a] rounded-lg border border-gray-300 dark:border-[#2f2f2f] text-gray-800 dark:text-gray-200 placeholder-gray-500 focus:outline-none focus:border-yellow-500"
             />
 
             <textarea
               {...register('description')}
               placeholder="Problem Description"
               rows={5}
-              className="w-full p-3 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-300 dark:border-gray-700 focus:border-cyan-500 dark:focus:border-cyan-400 outline-none"
+              className="w-full p-3 bg-gray-100 dark:bg-[#2a2a2a] rounded-lg border border-gray-300 dark:border-[#2f2f2f] text-gray-800 dark:text-gray-200 placeholder-gray-500 focus:outline-none focus:border-yellow-500"
             />
 
             <div className="flex gap-4">
               <select
                 {...register('difficulty')}
-                className="flex-1 p-3 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-300 dark:border-gray-700"
+                className="flex-1 p-3 bg-gray-100 dark:bg-[#2a2a2a] rounded-lg border border-gray-300 dark:border-[#2f2f2f] text-gray-800 dark:text-gray-200 focus:outline-none focus:border-yellow-500"
               >
                 <option value="easy">Easy</option>
                 <option value="medium">Medium</option>
@@ -160,7 +160,7 @@ function CreateProblem() {
 
               <select
                 {...register('tags')}
-                className="flex-1 p-3 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-300 dark:border-gray-700"
+                className="flex-1 p-3 bg-gray-100 dark:bg-[#2a2a2a] rounded-lg border border-gray-300 dark:border-[#2f2f2f] text-gray-800 dark:text-gray-200 focus:outline-none focus:border-yellow-500"
               >
                 <option value="Array">Array</option>
                 <option value="LinkList">Linked List</option>
@@ -170,7 +170,7 @@ function CreateProblem() {
               </select>
             </div>
             {/* ---------------- Examples ---------------- */}
-            <div className="bg-white dark:bg-gray-800/60 p-6 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 space-y-6">
+            <div className="bg-white dark:bg-[#262626] p-6 rounded-xl border border-gray-200 dark:border-[#2f2f2f] space-y-6">
 
               <h2 className="text-xl font-semibold text-cyan-700 dark:text-cyan-300">
                 Example Test Cases
@@ -191,7 +191,7 @@ function CreateProblem() {
               </button>
 
               {exampleFields.map((field, index) => (
-                <div key={field.id} className="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg mb-4 border border-gray-300 dark:border-gray-700">
+                <div key={field.id} className="bg-gray-50 dark:bg-[#1a1a1a] p-4 rounded-lg mb-4 border border-gray-300 dark:border-[#2f2f2f]">
 
                   {!collapsedExample[index] && (
                     <div className="space-y-2">
@@ -199,19 +199,19 @@ function CreateProblem() {
                       <textarea
                         {...register(`explainTestCase.${index}.input`)}
                         placeholder="Input Example"
-                        className="w-full p-2 bg-white dark:bg-black border border-gray-200 dark:border-gray-700 rounded-lg font-mono"
+                        className="w-full p-2 bg-gray-100 dark:bg-[#2a2a2a] border border-gray-300 dark:border-[#2f2f2f] rounded-lg font-mono text-gray-800 dark:text-gray-200 placeholder-gray-500 focus:outline-none focus:border-yellow-500"
                       />
 
                       <textarea
                         {...register(`explainTestCase.${index}.output`)}
                         placeholder="Output Example"
-                        className="w-full p-2 bg-white dark:bg-black border border-gray-200 dark:border-gray-700 rounded-lg font-mono"
+                        className="w-full p-2 bg-gray-100 dark:bg-[#2a2a2a] border border-gray-300 dark:border-[#2f2f2f] rounded-lg font-mono text-gray-800 dark:text-gray-200 placeholder-gray-500 focus:outline-none focus:border-yellow-500"
                       />
 
                       <textarea
                         {...register(`explainTestCase.${index}.explanation`)}
                         placeholder="Explanation"
-                        className="w-full p-2 bg-white dark:bg-black border border-gray-200 dark:border-gray-700 rounded-lg"
+                        className="w-full p-2 bg-gray-100 dark:bg-[#2a2a2a] border border-gray-300 dark:border-[#2f2f2f] rounded-lg text-gray-800 dark:text-gray-200 placeholder-gray-500 focus:outline-none focus:border-yellow-500"
                       />
 
                       <div className="flex gap-3 mt-2">
@@ -274,7 +274,7 @@ function CreateProblem() {
           </div>
 
           {/* ---------------- Test Cases ---------------- */}
-          <div className="bg-white dark:bg-gray-800/60 p-6 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 space-y-6">
+          <div className="bg-white dark:bg-[#262626] p-6 rounded-xl border border-gray-200 dark:border-[#2f2f2f] space-y-6">
             <h2 className="text-xl font-semibold text-cyan-700 dark:text-cyan-300">
               Test Cases
             </h2>
@@ -292,7 +292,7 @@ function CreateProblem() {
               </button>
 
               {visibleFields.map((field, index) => (
-                <div key={field.id} className="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg mb-4 border border-gray-300 dark:border-gray-700">
+                <div key={field.id} className="bg-gray-50 dark:bg-[#1a1a1a] p-4 rounded-lg mb-4 border border-gray-300 dark:border-[#2f2f2f]">
 
                   {!collapsedVisible[index] && (
                     <div className="space-y-2">
@@ -300,19 +300,19 @@ function CreateProblem() {
                       <textarea
                         {...register(`visibleTestCases.${index}.input`)}
                         placeholder="Input"
-                        className="w-full p-2 bg-white dark:bg-black border border-gray-200 dark:border-gray-700 rounded-lg font-mono"
+                        className="w-full p-2 bg-gray-100 dark:bg-[#2a2a2a] border border-gray-300 dark:border-[#2f2f2f] rounded-lg font-mono text-gray-800 dark:text-gray-200 placeholder-gray-500 focus:outline-none focus:border-yellow-500"
                       />
 
                       <textarea
                         {...register(`visibleTestCases.${index}.output`)}
                         placeholder="Output"
-                        className="w-full p-2 bg-white dark:bg-black border border-gray-200 dark:border-gray-700 rounded-lg font-mono"
+                        className="w-full p-2 bg-gray-100 dark:bg-[#2a2a2a] border border-gray-300 dark:border-[#2f2f2f] rounded-lg font-mono text-gray-800 dark:text-gray-200 placeholder-gray-500 focus:outline-none focus:border-yellow-500"
                       />
 
                       <textarea
                         {...register(`visibleTestCases.${index}.explanation`)}
                         placeholder="Explanation"
-                        className="w-full p-2 bg-white dark:bg-black border border-gray-200 dark:border-gray-700 rounded-lg"
+                        className="w-full p-2 bg-gray-100 dark:bg-[#2a2a2a] border border-gray-300 dark:border-[#2f2f2f] rounded-lg text-gray-800 dark:text-gray-200 placeholder-gray-500 focus:outline-none focus:border-yellow-500"
                       />
 
                       <div className="flex gap-3 mt-2">
@@ -388,7 +388,7 @@ function CreateProblem() {
               </button>
 
               {hiddenFields.map((field, index) => (
-                <div key={field.id} className="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg mb-4 border border-gray-300 dark:border-gray-700">
+                <div key={field.id} className="bg-gray-50 dark:bg-[#1a1a1a] p-4 rounded-lg mb-4 border border-gray-300 dark:border-[#2f2f2f]">
 
                   {!collapsedHidden[index] && (
                     <div className="space-y-2">
@@ -396,13 +396,13 @@ function CreateProblem() {
                       <textarea
                         {...register(`hiddenTestCases.${index}.input`)}
                         placeholder="Input"
-                        className="w-full p-2 bg-white dark:bg-black border border-gray-200 dark:border-gray-700 rounded-lg font-mono"
+                        className="w-full p-2 bg-gray-100 dark:bg-[#2a2a2a] border border-gray-300 dark:border-[#2f2f2f] rounded-lg font-mono text-gray-800 dark:text-gray-200 placeholder-gray-500 focus:outline-none focus:border-yellow-500"
                       />
 
                       <textarea
                         {...register(`hiddenTestCases.${index}.output`)}
                         placeholder="Output"
-                        className="w-full p-2 bg-white dark:bg-black border border-gray-200 dark:border-gray-700 rounded-lg font-mono"
+                        className="w-full p-2 bg-gray-100 dark:bg-[#2a2a2a] border border-gray-300 dark:border-[#2f2f2f] rounded-lg font-mono text-gray-800 dark:text-gray-200 placeholder-gray-500 focus:outline-none focus:border-yellow-500"
                       />
 
                       <div className="flex gap-3 mt-2">
@@ -463,7 +463,7 @@ function CreateProblem() {
           </div>
 
           {/* ---------------- Code Section ---------------- */}
-          <div className="bg-white dark:bg-gray-800/60 p-6 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 space-y-6">
+          <div className="bg-white dark:bg-[#262626] p-6 rounded-xl border border-gray-200 dark:border-[#2f2f2f] space-y-6">
 
             <h2 className="text-xl font-semibold text-cyan-700 dark:text-cyan-300">
               Code Templates & Reference Solutions
@@ -482,14 +482,14 @@ function CreateProblem() {
                     {...register(`startCode.${index}.initialCode`)}
                     placeholder="Initial Code Template"
                     rows={10}
-                    className="w-full p-3 bg-white dark:bg-black rounded-lg font-mono border border-gray-300 dark:border-gray-700 focus:border-purple-500 outline-none text-gray-900 dark:text-gray-100"
+                    className="w-full p-3 bg-gray-100 dark:bg-[#2a2a2a] rounded-lg font-mono border border-gray-300 dark:border-[#2f2f2f] text-gray-800 dark:text-gray-200 placeholder-gray-500 focus:outline-none focus:border-yellow-500"
                   />
 
                   <textarea
                     {...register(`referenceSolution.${index}.completeSolution`)}
                     placeholder="Reference Solution"
                     rows={10}
-                    className="w-full p-3 bg-white dark:bg-black rounded-lg font-mono border border-gray-300 dark:border-gray-700 focus:border-green-500 outline-none text-gray-900 dark:text-gray-100"
+                    className="w-full p-3 bg-gray-100 dark:bg-[#2a2a2a] rounded-lg font-mono border border-gray-300 dark:border-[#2f2f2f] text-gray-800 dark:text-gray-200 placeholder-gray-500 focus:outline-none focus:border-yellow-500"
                   />
 
                 </div>
@@ -503,7 +503,7 @@ function CreateProblem() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full py-3 bg-gradient-to-r from-cyan-500 to-purple-600 hover:opacity-90 rounded-xl font-semibold text-lg transition"
+            className="w-full py-3 bg-[#2f2f2f] hover:bg-[#3a3a3a] text-white rounded-xl font-semibold text-lg transition-colors duration-200"
           >
             {isSubmitting ? 'Creating...' : 'Create Problem 🚀'}
           </button>

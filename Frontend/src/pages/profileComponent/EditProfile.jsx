@@ -97,7 +97,7 @@ const EditProfile = ({ user, loadUser, closeModal }) => {
                         className="w-full h-full object-cover bg-gray-200 dark:bg-gray-700 transition-opacity duration-300 group-hover:opacity-75"
                     />
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/40">
-                        <label className="cursor-pointer bg-white/20 hover:bg-white/30 backdrop-blur-md text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                        <label className="cursor-pointer bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg font-medium transition-colors">
                             {uploadingCover ? "Uploading..." : "Change Cover"}
                             <input type="file" className="hidden" accept="image/*" onChange={handleCoverSelect} disabled={uploadingCover} />
                         </label>
@@ -106,7 +106,7 @@ const EditProfile = ({ user, loadUser, closeModal }) => {
 
                 {/* Profile Image Avatar positioned over the cover */}
                 <div className="absolute -bottom-8 left-6 group/avatar">
-                    <div className="h-24 w-24 rounded-2xl bg-white dark:bg-gray-800 p-1 shadow-md relative">
+                    <div className="h-24 w-24 rounded-xl bg-white dark:bg-[#262626] p-1 relative">
                         <img
                             src={profilePreview}
                             alt="profile"
@@ -133,7 +133,7 @@ const EditProfile = ({ user, loadUser, closeModal }) => {
                             value={formData.firstName}
                             onChange={handleChange}
                             required
-                            className="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors"
+                            className="w-full bg-gray-100 dark:bg-[#2a2a2a] border border-gray-300 dark:border-[#2f2f2f] rounded-lg px-4 py-2.5 text-gray-800 dark:text-gray-200 placeholder-gray-500 focus:outline-none focus:border-yellow-500 transition-colors"
                         />
                     </div>
 
@@ -145,7 +145,7 @@ const EditProfile = ({ user, loadUser, closeModal }) => {
                             name="lastName"
                             value={formData.lastName}
                             onChange={handleChange}
-                            className="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors"
+                            className="w-full bg-gray-100 dark:bg-[#2a2a2a] border border-gray-300 dark:border-[#2f2f2f] rounded-lg px-4 py-2.5 text-gray-800 dark:text-gray-200 placeholder-gray-500 focus:outline-none focus:border-yellow-500 transition-colors"
                         />
                     </div>
                 </div>
@@ -158,7 +158,7 @@ const EditProfile = ({ user, loadUser, closeModal }) => {
                         name="age"
                         value={formData.age}
                         onChange={handleChange}
-                        className="w-full md:w-1/2 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors"
+                        className="w-full md:w-1/2 bg-gray-100 dark:bg-[#2a2a2a] border border-gray-300 dark:border-[#2f2f2f] rounded-lg px-4 py-2.5 text-gray-800 dark:text-gray-200 placeholder-gray-500 focus:outline-none focus:border-yellow-500 transition-colors"
                     />
                 </div>
 
@@ -174,7 +174,7 @@ const EditProfile = ({ user, loadUser, closeModal }) => {
                     <button
                         type="submit"
                         disabled={loading}
-                        className="px-6 py-2.5 rounded-lg font-medium bg-purple-600 hover:bg-purple-700 text-white disabled:opacity-70 transition-colors shadow-lg shadow-purple-500/30"
+                        className="px-6 py-2.5 rounded-lg font-medium bg-purple-600 hover:bg-purple-700 text-white disabled:opacity-70 transition-colors"
                     >
                         {loading ? "Saving..." : "Save Changes"}
                     </button>

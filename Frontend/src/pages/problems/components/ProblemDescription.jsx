@@ -7,10 +7,10 @@ const ProblemDescription = ({ problem }) => {
         <>
             <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">{problem.title}</h1>
             <div className="flex items-center gap-2 mb-6">
-                <span className={`px-3 py-1 rounded-full text-sm font-medium
-                    ${problem.difficulty === 'easy' ? 'text-green-500 bg-green-500/10 border border-green-500/20' :
-                        problem.difficulty === 'medium' ? 'text-yellow-500 bg-yellow-500/10 border border-yellow-500/20' :
-                            'text-red-500 bg-red-500/10 border border-red-500/20'}`}>
+                <span className={`rounded-full px-3 py-1 text-sm font-medium bg-gray-100 dark:bg-[#2f2f2f]
+                    ${problem.difficulty === 'easy' ? 'text-green-400' :
+                        problem.difficulty === 'medium' ? 'text-yellow-400' :
+                            'text-red-400'}`}>
                     {problem.difficulty}
                 </span>
             </div>

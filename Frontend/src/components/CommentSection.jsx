@@ -85,14 +85,14 @@ const CommentSection = ({ postId, authorId }) => {
 
       <div className="flex gap-2 mb-4">
         <input
-          className="flex-1 bg-gray-50 dark:bg-[#151822] text-gray-900 dark:text-white rounded-lg py-2 px-3 border border-gray-200 dark:border-[#2d3348] focus:border-[#ff6b00] dark:focus:border-[#ff6b00] outline-none text-sm transition-colors"
+          className="flex-1 bg-gray-100 dark:bg-[#2a2a2a] text-gray-800 dark:text-gray-200 rounded-full px-3 py-1 border border-gray-300 dark:border-[#2f2f2f] placeholder-gray-500 focus:outline-none focus:border-yellow-500 text-sm transition-colors"
           placeholder="Write comment..."
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
 
         <button
-          className="bg-green-500 hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed text-white px-4 py-2 rounded-lg font-medium transition-colors text-sm"
+          className="bg-[#2f2f2f] hover:bg-[#3a3a3a] disabled:opacity-50 disabled:cursor-not-allowed text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 text-sm"
           onClick={handleAddComment}
           disabled={!userId || !text.trim()}
         >
