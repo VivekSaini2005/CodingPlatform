@@ -6,7 +6,7 @@ const socketHandler = (io) => {
 
   io.on("connection", (socket) => {
 
-    // console.log("User Connected:", socket.id);
+    console.log("User Connected:", socket.id);
 
 
     /*
@@ -23,55 +23,53 @@ const socketHandler = (io) => {
     */
 
     socket.on("likePost", async ({ postId, userId, authorId }) => {
-      try {
-        const post = await Post.findById(postId);
-        if (!post || !userId) return;
 
-        const userIdStr = userId.toString();
-        const alreadyLiked = post.likes.some((id) => id.toString() === userIdStr);
+      const post = await Post.findById(postId);
 
-        if (!alreadyLiked) {
-          post.likes.push(userId);
-          post.dislikes = post.dislikes.filter(
-            (id) => id.toString() !== userIdStr
-          );
-        } else {
-          // User is un-liking
-          post.likes = post.likes.filter(
-            (id) => id.toString() !== userIdStr
-          );
-        }
+      if (!post.likes.includes(userId)) {
 
-        await post.save();
+        post.likes.push(userId);
+        post.dislikes = post.dislikes.filter(
+          (id) => id.toString() !== userId
+        );
 
-        io.emit("postLiked", {
-          postId,
-          likes: post.likes.length,
-          dislikes: post.dislikes.length
-        });
+      } else {
+        // User is un-liking
+        post.likes = post.likes.filter(
+          (id) => id.toString() !== userId
+        );
+      }
+
+      await post.save();
+
+      io.emit("postLiked", {
+        postId,
+        likes: post.likes.length,
+        dislikes: post.dislikes.length
+      });
 
 
       /*
       CREATE NOTIFICATION
       */
 
-        if (authorId && authorId !== userId) {
-          await Notification.create({
-            receiver: authorId,
-            sender: userId,
-            type: "like",
-            post: postId
-          });
+      if (authorId && authorId !== userId) {
 
-          io.to(authorId).emit("notification", {
-            type: "like",
-            sender: userId,
-            postId
-          });
-        }
-      } catch (error) {
-        console.error("Socket likePost error:", error.message);
+        await Notification.create({
+          receiver: authorId,
+          sender: userId,
+          type: "like",
+          post: postId
+        });
+
+        io.to(authorId).emit("notification", {
+          type: "like",
+          sender: userId,
+          postId
+        });
+
       }
+
     });
 
 
@@ -80,35 +78,30 @@ const socketHandler = (io) => {
     */
 
     socket.on("dislikePost", async ({ postId, userId, authorId }) => {
-      try {
-        const post = await Post.findById(postId);
-        if (!post || !userId) return;
 
-        const userIdStr = userId.toString();
-        const alreadyDisliked = post.dislikes.some((id) => id.toString() === userIdStr);
+      const post = await Post.findById(postId);
 
-        if (!alreadyDisliked) {
-          post.dislikes.push(userId);
-          post.likes = post.likes.filter(
-            (id) => id.toString() !== userIdStr
-          );
-        } else {
-          // User is un-disliking
-          post.dislikes = post.dislikes.filter(
-            (id) => id.toString() !== userIdStr
-          );
-        }
+      if (!post.dislikes.includes(userId)) {
 
-        await post.save();
+        post.dislikes.push(userId);
+        post.likes = post.likes.filter(
+          (id) => id.toString() !== userId
+        );
 
-        io.emit("postDisliked", {
-          postId,
-          likes: post.likes.length,
-          dislikes: post.dislikes.length
-        });
-      } catch (error) {
-        console.error("Socket dislikePost error:", error.message);
+      } else {
+        // User is un-disliking
+        post.dislikes = post.dislikes.filter(
+          (id) => id.toString() !== userId
+        );
       }
+
+      await post.save();
+
+      io.emit("postDisliked", {
+        postId,
+        likes: post.likes.length,
+        dislikes: post.dislikes.length
+      });
 
     });
 
@@ -205,7 +198,7 @@ const socketHandler = (io) => {
     */
 
     socket.on("disconnect", () => {
-      // console.log("User Disconnected");
+      console.log("User Disconnected");
     });
 
   });
