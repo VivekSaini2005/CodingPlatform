@@ -22,7 +22,7 @@ const io = new Server(server, {
   cors: {
     origin: [
       "http://localhost:5173",
-      "https://coding-platform-eta-woad.vercel.app"
+      "https://coding-platform-cyan.vercel.app"
     ],
     credentials: true
   }
@@ -35,7 +35,7 @@ app.use(express.json());
 app.use(cookieParser());
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://coding-platform-eta-woad.vercel.app"
+  "https://coding-platform-cyan.vercel.app"
 ];
 
 app.use(cors({
