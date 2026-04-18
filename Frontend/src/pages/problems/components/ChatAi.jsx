@@ -42,7 +42,7 @@ const TypewriterMessage = ({ text, isLastMessage }) => {
       <div className="whitespace-pre-wrap leading-relaxed text-sm md:text-base">
         {displayedText}
         {isTyping && isLastMessage && (
-          <span className="inline-block w-[2px] h-4 bg-base-content ml-1 animate-pulse"></span>
+          <span className="inline-block w-0.5 h-4 bg-gray-800 dark:bg-gray-200 ml-1 animate-pulse"></span>
         )}
       </div>
     </div>
@@ -119,10 +119,10 @@ function ChatAi({ problem }) {
   };
 
   return (
-    <div className="flex flex-col h-full max-h-[70vh] min-h-[420px] rounded-xl bg-base-100/60 border border-base-300 overflow-hidden">
+    <div className="flex flex-col h-full max-h-[70vh] min-h-105 rounded-xl bg-white/90 dark:bg-[#1f1f1f]/80 border border-gray-200 dark:border-[#2f2f2f] overflow-hidden">
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-5 space-y-5 scrollbar-thin scrollbar-thumb-base-300">
+      <div className="flex-1 overflow-y-auto p-5 space-y-5 scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-700">
 
         {messages.map((msg, index) => {
 
@@ -156,11 +156,11 @@ function ChatAi({ problem }) {
 
         {isLoading && (
           <div className="flex justify-start">
-            <div className="bg-base-200 px-4 py-3 rounded-xl flex items-center gap-2">
-              <div className="w-2 h-2 bg-base-content rounded-full animate-bounce"></div>
-              <div className="w-2 h-2 bg-base-content rounded-full animate-bounce delay-150"></div>
-              <div className="w-2 h-2 bg-base-content rounded-full animate-bounce delay-300"></div>
-              <span className="text-sm opacity-70 ml-2">AI is thinking...</span>
+            <div className="bg-gray-100 dark:bg-[#2a2a2a] text-gray-800 dark:text-gray-200 px-4 py-3 rounded-xl flex items-center gap-2 border border-gray-200 dark:border-[#2f2f2f]">
+              <div className="w-2 h-2 bg-gray-700 dark:bg-gray-300 rounded-full animate-bounce"></div>
+              <div className="w-2 h-2 bg-gray-700 dark:bg-gray-300 rounded-full animate-bounce delay-150"></div>
+              <div className="w-2 h-2 bg-gray-700 dark:bg-gray-300 rounded-full animate-bounce delay-300"></div>
+              <span className="text-sm text-gray-600 dark:text-gray-400 ml-2">AI is thinking...</span>
             </div>
           </div>
         )}
@@ -172,7 +172,7 @@ function ChatAi({ problem }) {
       {/* Input */}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="sticky bottom-0 bg-base-100/70 border-t border-base-300 p-4"
+        className="sticky bottom-0 bg-white/90 dark:bg-[#1f1f1f]/90 border-t border-gray-200 dark:border-[#2f2f2f] p-4"
         >
         <div className="flex items-center gap-3 max-w-4xl mx-auto">
 

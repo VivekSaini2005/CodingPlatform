@@ -16,7 +16,8 @@ import "prismjs/components/prism-cpp";
 import "prismjs/components/prism-java";
 import "prismjs/components/prism-python";
 import "prismjs/components/prism-javascript";
-import "prismjs/themes/prism-tomorrow.css";
+import "prismjs/themes/prism.css"; // Light theme
+import "prismjs/themes/prism-tomorrow.css"; // Dark theme
 import problemsImage from "../images/Problems.png";
 import leaderboardImage from "../images/Leaderboard.png";
 import discussionImage from "../images/Discussion.png";
@@ -207,6 +208,31 @@ const Home = () => {
       editorScrollRef.current.scrollTop = editorScrollRef.current.scrollHeight;
     }
   }, [code]);
+  // Detect dark mode (Tailwind 'dark' class on html or via context)
+  const [isDark, setIsDark] = useState(false);
+  useEffect(() => {
+    const checkDark = () => {
+      setIsDark(document.documentElement.classList.contains('dark'));
+    };
+    checkDark();
+    const observer = new MutationObserver(checkDark);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    return () => observer.disconnect();
+  }, []);
+
+  // Dynamically switch Prism theme
+  useEffect(() => {
+    const lightTheme = document.querySelector('link[data-prism-light]');
+    const darkTheme = document.querySelector('link[data-prism-dark]');
+    if (isDark) {
+      if (lightTheme) lightTheme.disabled = true;
+      if (darkTheme) darkTheme.disabled = false;
+    } else {
+      if (lightTheme) lightTheme.disabled = false;
+      if (darkTheme) darkTheme.disabled = true;
+    }
+  }, [isDark]);
+
   return (
     <div className="min-h-screen bg-white dark:bg-[#1a1a1a] text-black dark:text-white">
       {" "}
@@ -336,14 +362,14 @@ const Home = () => {
           {" "}
           <div className="order-1 md:order-2">
             {" "}
-            <div className="mx-auto w-full max-w-[560px] rounded-[2rem] bg-gray-100 p-4 transition duration-300 hover:scale-105 dark:bg-[#262626]">
+            <div className="mx-auto w-full max-w-140 rounded-4xl bg-gray-100 p-4 transition duration-300 hover:scale-105 dark:bg-[#262626]">
               {" "}
-              <div className="relative overflow-hidden rounded-[1.5rem] border border-gray-200 bg-white dark:border-[#2f2f2f] dark:bg-[#1a1a1a]">
+              <div className="relative overflow-hidden rounded-3xl border border-gray-200 bg-white dark:border-[#2f2f2f] dark:bg-[#1a1a1a]">
                 {" "}
                 <img
                   src={problemsImage}
                   alt="Problems section preview"
-                  className="h-[300px] w-full object-cover md:h-[320px]"
+                  className="h-75 w-full object-cover md:h-80"
                 />{" "}
               </div>{" "}
             </div>{" "}
@@ -403,14 +429,14 @@ const Home = () => {
           {" "}
           <div className="order-1 md:order-2">
             {" "}
-            <div className="mx-auto w-full max-w-[560px] rounded-[2rem] bg-gray-100 p-4 transition duration-300 hover:scale-105 dark:bg-[#262626]">
+            <div className="mx-auto w-full max-w-140 rounded-4xl bg-gray-100 p-4 transition duration-300 hover:scale-105 dark:bg-[#262626]">
               {" "}
-              <div className="relative overflow-hidden rounded-[1.5rem] border border-gray-200 bg-white dark:border-[#2f2f2f] dark:bg-[#1a1a1a]">
+              <div className="relative overflow-hidden rounded-3xl border border-gray-200 bg-white dark:border-[#2f2f2f] dark:bg-[#1a1a1a]">
                 {" "}
                 <img
                   src={leaderboardImage}
                   alt="Leaderboard section preview"
-                  className="h-[300px] w-full object-cover md:h-[320px]"
+                  className="h-75 w-full object-cover md:h-80"
                 />{" "}
               </div>{" "}
             </div>{" "}
@@ -469,14 +495,14 @@ const Home = () => {
           {" "}
           <div className="order-1 md:order-1">
             {" "}
-            <div className="mx-auto w-full max-w-[560px] rounded-[2rem] bg-gray-100 p-4 transition duration-300 hover:scale-105 dark:bg-[#262626]">
+            <div className="mx-auto w-full max-w-140 rounded-4xl bg-gray-100 p-4 transition duration-300 hover:scale-105 dark:bg-[#262626]">
               {" "}
-              <div className="relative overflow-hidden rounded-[1.5rem] border border-gray-200 bg-white dark:border-[#2f2f2f] dark:bg-[#1a1a1a]">
+              <div className="relative overflow-hidden rounded-3xl border border-gray-200 bg-white dark:border-[#2f2f2f] dark:bg-[#1a1a1a]">
                 {" "}
                 <img
                   src={discussionImage}
                   alt="Discussion section preview"
-                  className="h-[300px] w-full object-cover md:h-[320px]"
+                  className="h-75 w-full object-cover md:h-80"
                 />{" "}
               </div>{" "}
             </div>{" "}
@@ -535,14 +561,14 @@ const Home = () => {
           {" "}
           <div className="order-1 md:order-2">
             {" "}
-            <div className="mx-auto w-full max-w-[560px] rounded-[2rem] bg-gray-100 p-4 transition duration-300 hover:scale-105 dark:bg-[#262626]">
+            <div className="mx-auto w-full max-w-140 rounded-4xl bg-gray-100 p-4 transition duration-300 hover:scale-105 dark:bg-[#262626]">
               {" "}
-              <div className="relative overflow-hidden rounded-[1.5rem] border border-gray-200 bg-white dark:border-[#2f2f2f] dark:bg-[#1a1a1a]">
+              <div className="relative overflow-hidden rounded-3xl border border-gray-200 bg-white dark:border-[#2f2f2f] dark:bg-[#1a1a1a]">
                 {" "}
                 <img
                   src={aiHelpImage}
                   alt="AI help section preview"
-                  className="h-[300px] w-full object-cover md:h-[320px]"
+                  className="h-75 w-full object-cover md:h-80"
                 />{" "}
               </div>{" "}
             </div>{" "}
@@ -619,7 +645,7 @@ const Home = () => {
           </p>{" "}
           <div className="max-w-3xl mx-auto mt-12">
             {" "}
-            <div className="bg-gray-100 dark:bg-[#1a1a1a] text-gray-900 dark:text-gray-200 font-mono text-sm rounded-xl border border-gray-200 dark:border-[#2f2f2f] overflow-hidden text-left">
+              <div className="bg-gray-100 dark:bg-[#1a1a1a] text-gray-900 dark:text-gray-200 font-mono text-sm rounded-xl border border-gray-200 dark:border-[#2f2f2f] overflow-hidden text-left">
               {" "}
               <div className="flex justify-center items-center gap-6 px-4 py-3 border-b border-gray-200 dark:border-[#2f2f2f] bg-gray-50 dark:bg-[#262626] text-sm font-medium">
                 {" "}
@@ -648,7 +674,7 @@ const Home = () => {
               </div>{" "}
               <div
                 ref={editorScrollRef}
-                className="p-4 h-[260px] overflow-auto bg-gray-100 dark:bg-[#1a1a1a]"
+                className="p-4 h-65 overflow-auto bg-gray-100 dark:bg-[#1a1a1a]"
               >
                 {" "}
                 <div className="flex">
@@ -659,13 +685,12 @@ const Home = () => {
                       <div key={i}>{i + 1}</div>
                     ))}{" "}
                   </div>{" "}
-                  <pre className="flex-1 whitespace-pre-wrap leading-relaxed text-gray-800 dark:text-gray-200">
-                    {" "}
+                  <pre className={`flex-1 whitespace-pre-wrap leading-relaxed ${isDark ? 'text-gray-200' : 'text-black'}`}>
                     <code
                       dangerouslySetInnerHTML={{ __html: highlightedCode }}
-                    />{" "}
-                    <span className="animate-pulse">|</span>{" "}
-                  </pre>{" "}
+                    />
+                    <span className="animate-pulse">|</span>
+                  </pre>
                 </div>{" "}
               </div>{" "}
             </div>{" "}
@@ -673,26 +698,25 @@ const Home = () => {
         </div>{" "}
       </section>{" "}
       {/* CTA Section */}{" "}
-      <div className="px-6 pb-16 lg:px-16">
-        {" "}
-        <div className="mx-6 rounded-xl bg-white dark:bg-[#262626] border border-gray-200 dark:border-[#2f2f2f] p-10 text-center text-white lg:mx-16">
-          {" "}
-          <h2 className="text-3xl font-bold sm:text-4xl">
-            Start your coding journey today
-          </h2>{" "}
-          <div className="mt-6">
-            {" "}
-            <Link
-              to="/problems"
-              className="inline-flex items-center justify-center rounded-lg bg-white dark:bg-[#1a1a1a] px-6 py-3 font-semibold text-black dark:text-white transition hover:bg-gray-200"
-            >
-              {" "}
-              Get Started{" "}
-            </Link>{" "}
-          </div>{" "}
-        </div>{" "}
-      </div>{" "}
+     
     </div>
   );
 };
+// Prism operator color override for dark mode
+// This ensures operators (=, +, -, etc.) are clearly visible in dark theme
+const prismOperatorStyle = `
+  html.dark .token.operator {
+    color: #ffb86c !important; /* orange accent for operators, matches popular dark themes */
+    background: none !important;
+    filter: none !important;
+  }
+`;
+
+if (typeof document !== 'undefined' && !document.getElementById('prism-operator-dark')) {
+  const style = document.createElement('style');
+  style.id = 'prism-operator-dark';
+  style.innerHTML = prismOperatorStyle;
+  document.head.appendChild(style);
+}
+
 export default Home;

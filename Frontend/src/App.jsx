@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -20,6 +20,13 @@ import { AuthProvider } from './context/AuthContext';
 import { ThemeProvider } from './context/themeContext.jsx';
 
 function App() {
+	const location = useLocation();
+
+	const hideFooter =
+		location.pathname === '/profile' ||
+		location.pathname === '/dashboard' ||
+		/^\/problems\/[^/]+$/.test(location.pathname);
+
 	return (
 		<ThemeProvider>
 			<AuthProvider>
@@ -45,7 +52,7 @@ function App() {
 						<Route path="/admin/video" element={<AdminVideo />} />
 					</Routes>
 
-					<Footer />
+					{!hideFooter && <Footer />}
 				</div>
 			</AuthProvider>
 		</ThemeProvider>

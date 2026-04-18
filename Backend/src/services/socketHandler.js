@@ -23,53 +23,55 @@ const socketHandler = (io) => {
     */
 
     socket.on("likePost", async ({ postId, userId, authorId }) => {
+      try {
+        const post = await Post.findById(postId);
+        if (!post || !userId) return;
 
-      const post = await Post.findById(postId);
+        const userIdStr = userId.toString();
+        const alreadyLiked = post.likes.some((id) => id.toString() === userIdStr);
 
-      if (!post.likes.includes(userId)) {
+        if (!alreadyLiked) {
+          post.likes.push(userId);
+          post.dislikes = post.dislikes.filter(
+            (id) => id.toString() !== userIdStr
+          );
+        } else {
+          // User is un-liking
+          post.likes = post.likes.filter(
+            (id) => id.toString() !== userIdStr
+          );
+        }
 
-        post.likes.push(userId);
-        post.dislikes = post.dislikes.filter(
-          (id) => id.toString() !== userId
-        );
+        await post.save();
 
-      } else {
-        // User is un-liking
-        post.likes = post.likes.filter(
-          (id) => id.toString() !== userId
-        );
-      }
-
-      await post.save();
-
-      io.emit("postLiked", {
-        postId,
-        likes: post.likes.length,
-        dislikes: post.dislikes.length
-      });
+        io.emit("postLiked", {
+          postId,
+          likes: post.likes.length,
+          dislikes: post.dislikes.length
+        });
 
 
       /*
       CREATE NOTIFICATION
       */
 
-      if (authorId && authorId !== userId) {
+        if (authorId && authorId !== userId) {
+          await Notification.create({
+            receiver: authorId,
+            sender: userId,
+            type: "like",
+            post: postId
+          });
 
-        await Notification.create({
-          receiver: authorId,
-          sender: userId,
-          type: "like",
-          post: postId
-        });
-
-        io.to(authorId).emit("notification", {
-          type: "like",
-          sender: userId,
-          postId
-        });
-
+          io.to(authorId).emit("notification", {
+            type: "like",
+            sender: userId,
+            postId
+          });
+        }
+      } catch (error) {
+        console.error("Socket likePost error:", error.message);
       }
-
     });
 
 
@@ -78,30 +80,35 @@ const socketHandler = (io) => {
     */
 
     socket.on("dislikePost", async ({ postId, userId, authorId }) => {
+      try {
+        const post = await Post.findById(postId);
+        if (!post || !userId) return;
 
-      const post = await Post.findById(postId);
+        const userIdStr = userId.toString();
+        const alreadyDisliked = post.dislikes.some((id) => id.toString() === userIdStr);
 
-      if (!post.dislikes.includes(userId)) {
+        if (!alreadyDisliked) {
+          post.dislikes.push(userId);
+          post.likes = post.likes.filter(
+            (id) => id.toString() !== userIdStr
+          );
+        } else {
+          // User is un-disliking
+          post.dislikes = post.dislikes.filter(
+            (id) => id.toString() !== userIdStr
+          );
+        }
 
-        post.dislikes.push(userId);
-        post.likes = post.likes.filter(
-          (id) => id.toString() !== userId
-        );
+        await post.save();
 
-      } else {
-        // User is un-disliking
-        post.dislikes = post.dislikes.filter(
-          (id) => id.toString() !== userId
-        );
+        io.emit("postDisliked", {
+          postId,
+          likes: post.likes.length,
+          dislikes: post.dislikes.length
+        });
+      } catch (error) {
+        console.error("Socket dislikePost error:", error.message);
       }
-
-      await post.save();
-
-      io.emit("postDisliked", {
-        postId,
-        likes: post.likes.length,
-        dislikes: post.dislikes.length
-      });
 
     });
 

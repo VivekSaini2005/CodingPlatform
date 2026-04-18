@@ -10,17 +10,17 @@ const Editorial = ({ problem }) => {
   );
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 space-y-6 text-gray-900 dark:text-gray-100">
 
       {/* ---------------- VIDEO SECTION ---------------- */}
       {ytlink ===""? 
         <div className="w-full">
-            <h2 className="text-xl font-semibold mb-3">Video Editorial Comming Soon</h2>
+            <h2 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">Video Editorial Comming Soon</h2>
         </div>    
       : 
       ytlink?(
         <div className="w-full">
-          <h2 className="text-xl font-semibold mb-3">Video Editorial</h2>
+          <h2 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">Video Editorial</h2>
 
           <div className="aspect-video w-full">
             <iframe
@@ -56,7 +56,7 @@ const Editorial = ({ problem }) => {
                 className={`px-4 py-2 rounded-md border 
                   ${activeLang === sol.language 
                     ? "bg-blue-600 text-white" 
-                    : " bg-gray-50 dark:bg-gray-950"}
+                    : "bg-gray-50 dark:bg-gray-950 text-gray-800 dark:text-gray-200 border-gray-300 dark:border-[#2f2f2f]"}
                 `}
               >
                 {sol.language}
