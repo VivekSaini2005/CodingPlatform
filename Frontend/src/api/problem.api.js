@@ -1,5 +1,5 @@
 import axiosInstance from "./axiosInstance";
-const BASE_URL = "https://codingplatform-3ipe.onrender.com";
+const BASE_URL = "https://codingplatform-tclb.onrender.com";
 // const BASE_URL = "http://localhost:4000";
 
 export const getAllProblems = async () => {
