@@ -18,6 +18,7 @@ import AdminVideo from './InnerComponents/AdminPanel/AdminVideo.jsx';
 import Admin from './pages/Admin.jsx';
 import { AuthProvider } from './context/AuthContext';
 import { ThemeProvider } from './context/themeContext.jsx';
+import ScrollToTop from './ScrollToTop.jsx';
 
 function App() {
 	const location = useLocation();
@@ -30,6 +31,7 @@ function App() {
 	return (
 		<ThemeProvider>
 			<AuthProvider>
+				<ScrollToTop />
 				<div className="min-h-screen bg-gray-50 text-gray-900 transition-colors duration-200 dark:bg-[#1a1a1a] dark:text-gray-200">
 					<Navbar />
 
